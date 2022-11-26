@@ -1,5 +1,10 @@
 package org.ss.DAO;
 
+import org.ss.DTO.Sighting;
+
+import java.time.LocalDate;
+import java.util.List;
+
 /**
  *@author : Claude Seide, Everlyn Leon, Mariya Malakhava, Neyssa Cadet
  *
@@ -7,4 +12,15 @@ package org.ss.DAO;
 
 
 public interface SightingDAO {
+    public Sighting getSightingByID(int sightingID);
+
+    public Sighting addNewSighting(Sighting sighting);
+
+    public List<Sighting> getAllSightings();
+
+    public boolean updateSighting(Sighting sighting);
+
+    public boolean deleteSighting(int sightingID);
+
+    public List<Sighting> getSightingsByDate(LocalDate date);
 }

@@ -7,4 +7,6 @@ package org.ss.DAO;
 
 
 public class SuperDAOImpl {
+
+
 }
