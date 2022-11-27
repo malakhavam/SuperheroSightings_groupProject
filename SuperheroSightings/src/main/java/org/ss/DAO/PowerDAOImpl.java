@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Transactional;
 import org.ss.DTO.Power;
 
 /**
@@ -36,9 +37,17 @@ public class PowerDAOImpl implements PowerDAO {
     }
 
     @Override
+    @Transactional
     public Power addNewPower(Power power) {
-        // TODO Auto-generated method stub
-        return null;
+        final String SQL = "INSERT INTO Powers(powerName, powerDescription)" +
+            "VALUES(?,?)";
+            jdbc.update(SQL,
+            power.getPowerName(),
+            power.getPowerDescription());
+
+            int newID = jdbc.queryForObject(SQL, Integer.class);
+            power.setPowerID(newID);
+            return power;
     }
 
     @Override
