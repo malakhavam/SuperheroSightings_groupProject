@@ -53,14 +53,16 @@ public class SuperDAOImpl implements SuperDAO{
 
     @Override
     public List<Super> getAllSupers() {
-        // TODO Auto-generated method stub
-        return null;
+        final String SQL = "SELECT * FROM Supers";
+        return jdbc.query(SQL, new SuperMapper());
     }
 
     @Override
     public void updateSuper(Super sup) {
-        // TODO Auto-generated method stub
-        
+        final String SQL = "UPDATE Supers SET superName = ?, superDescription = ? WHERE superID = ?";
+        jdbc.update(SQL, 
+        sup.getSuperName(),
+        sup.getSuperDescription());
     }
 
     @Override

@@ -16,9 +16,9 @@ public interface SuperDAO {
 
     public List<Super> getAllSupers();
 
-    public Boolean updateSuper(Super sup);
+    public void updateSuper(Super sup);
 
-    public Boolean deleteSuper(int superID);
+    public void deleteSuper(int superID);
 
     public List<Super> getAllSupersByOrganization(int organizationID);
 
