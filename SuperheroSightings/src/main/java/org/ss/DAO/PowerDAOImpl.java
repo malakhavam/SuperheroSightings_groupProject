@@ -4,6 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.ss.DTO.Power;
 
@@ -15,10 +18,21 @@ import org.ss.DTO.Power;
 
 public class PowerDAOImpl implements PowerDAO {
 
+    private final JdbcTemplate jdbc;
+
+    @Autowired
+    public PowerDAOImpl(JdbcTemplate jdbc){
+        this.jdbc = jdbc;
+    }
+
     @Override
     public Power getPowerByID(int powerID) {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            final String SQL = "SELECT * FROM Powers WHERE powerID = ?";
+            return jdbc.queryForObject(SQL, new PowerMapper(), powerID);
+        } catch (DataAccessException ex) {
+            return null;
+        }
     }
 
     @Override
@@ -40,7 +54,7 @@ public class PowerDAOImpl implements PowerDAO {
     }
 
     @Override
-    public Boolean deletePower(int powerID) {
+    public void deletePower(int powerID) {
         // TODO Auto-generated method stub
         return null;
     }
