@@ -58,8 +58,10 @@ public class PowerDAOImpl implements PowerDAO {
 
     @Override
     public Boolean updatePower(Power power) {
-        // TODO Auto-generated method stub
-        return null;
+        final String SQL = "UPDATE Powers SET powerName = ?, powerDescription = ? WHERE powerID = ?";
+        return jdbc.update(SQL, 
+            power.getPowerName(),
+            power.getPowerDescription())>0;
     }
 
     @Override
