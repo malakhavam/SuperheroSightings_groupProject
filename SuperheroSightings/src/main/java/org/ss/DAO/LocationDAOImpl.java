@@ -1,7 +1,13 @@
 package org.ss.DAO;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.ss.DTO.Location;
 
 /**
@@ -12,10 +18,21 @@ import org.ss.DTO.Location;
 
 public class LocationDAOImpl implements LocationDAO {
 
+    private final JdbcTemplate jdbc;
+
+    @Autowired
+    public LocationDAOImpl(JdbcTemplate jdbc){
+        this.jdbc = jdbc;
+    }
+
     @Override
     public Location getLocationByID(int locationID) {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            final String GET_LOCATION_BY_ID = "SELECT * FROM Locations WHERE locationID = ?";
+            return jdbc.queryForObject(GET_LOCATION_BY_ID, new LocationMapper(), locationID);
+        } catch (DataAccessException ex) {
+            return null;
+        }
     }
 
     @Override
@@ -26,8 +43,8 @@ public class LocationDAOImpl implements LocationDAO {
 
     @Override
     public List<Location> getAllLocations() {
-        // TODO Auto-generated method stub
-        return null;
+        final String GET_ALL_LOCATIONS = "SELECT * FROM Locations";
+        return jdbc.query(GET_ALL_LOCATIONS, new LocationMapper());
     }
 
     @Override
@@ -46,6 +63,21 @@ public class LocationDAOImpl implements LocationDAO {
     public List<Location> getLocationsBySuper(int superID) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    private static final class LocationMapper implements RowMapper<Location> {
+
+        @Override
+        public Location mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Location location = new Location();
+            location.setLocationID(rs.getInt("locationID"));
+            location.setLocationName(rs.getString("locationName"));
+            location.setLocationDescription(rs.getString("locationDescription"));
+            location.setLocationAddress(rs.getString("locationAddress"));
+            location.setLocationLatitude(rs.getString("locationLatitude"));
+            location.setLocationLongitude(rs.getString("locationLongitude"));
+            return location;
+        }
     }
 
 
