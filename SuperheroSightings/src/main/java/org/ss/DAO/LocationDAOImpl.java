@@ -60,14 +60,14 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     @Override
-    public Boolean updateLocation(Location location) {
+    public void updateLocation(Location location) {
         final String SQL = "UPDATE Locations SET locationName = ?, locationDescription = ?, locationAddress = ?, locationLatitude = ?, locationLongitude = ? WHERE locationID = ?";
-        return jdbc.update(SQL, 
+        jdbc.update(SQL, 
             location.getLocationName(),
             location.getLocationDescription(),
             location.getLocationAddress(),
             location.getLocationLatitude(),
-            location.getLocationLongitude())>0;
+            location.getLocationLongitude());
     }
 
     @Override
