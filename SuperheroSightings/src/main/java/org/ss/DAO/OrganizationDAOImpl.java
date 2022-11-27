@@ -59,8 +59,11 @@ public class OrganizationDAOImpl implements OrganizationDAO{
 
     @Override
     public Boolean updateOrganization(Organization organization) {
-        // TODO Auto-generated method stub
-        return null;
+        final String SQL = "UPDATE Organizations SET organizationName = ?, organizationDescription = ?, organizationContact = ? WHERE organizationID = ?";
+        return jdbc.update(SQL,
+            organization.getOrganizationName(),
+            organization.getOrganizationDescription(),
+            organization.getOrganizationContact())>0;
     }
 
     @Override
