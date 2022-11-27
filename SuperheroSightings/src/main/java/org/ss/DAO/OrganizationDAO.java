@@ -18,7 +18,7 @@ public interface OrganizationDAO {
 
     public Boolean updateOrganization(Organization organization);
 
-    public Boolean deleteOrganization(int organizationID);
+    public void deleteOrganization(int organizationID);
 
     public List<Organization> getOrganizationsBySuper(int superID);
 }

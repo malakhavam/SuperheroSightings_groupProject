@@ -54,7 +54,7 @@ public class OrganizationDAOImpl implements OrganizationDAO{
     }
 
     @Override
-    public Boolean deleteOrganization(int organizationID) {
+    public void deleteOrganization(int organizationID) {
         // TODO Auto-generated method stub
         return null;
     }
