@@ -4,6 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.ss.DTO.Organization;
 
@@ -14,11 +17,22 @@ import org.ss.DTO.Organization;
 
 
 public class OrganizationDAOImpl implements OrganizationDAO{
+    
+    private final JdbcTemplate jdbc;
+
+    @Autowired
+    public OrganizationDAOImpl(JdbcTemplate jdbc){
+        this.jdbc = jdbc;
+    }
 
     @Override
     public Organization getOrganizationByID(int organizationID) {
-        // TODO Auto-generated method stub
-        return null;
+        try{
+            final String SQL = "SELECT * FROM Organizations WHERE organizationID = ?";
+            return jdbc.queryForObject(SQL, new OrganizationMapper(), organizationID);
+        } catch(DataAccessException ex){
+            return null;
+        }
     }
 
     @Override
