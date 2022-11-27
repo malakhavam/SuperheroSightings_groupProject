@@ -53,8 +53,8 @@ public class OrganizationDAOImpl implements OrganizationDAO{
 
     @Override
     public List<Organization> getAllOrganizations() {
-        // TODO Auto-generated method stub
-        return null;
+        final String SQL = "SELECT * FROM Organizations";
+        return jdbc.query(SQL, new OrganizationMapper());
     }
 
     @Override
