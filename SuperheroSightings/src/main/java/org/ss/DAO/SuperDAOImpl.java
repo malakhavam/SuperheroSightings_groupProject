@@ -4,6 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.ss.DTO.Super;
 
@@ -15,10 +18,21 @@ import org.ss.DTO.Super;
 
 public class SuperDAOImpl implements SuperDAO{
 
+    private final JdbcTemplate jdbc;
+
+    @Autowired
+    public SuperDAOImpl(JdbcTemplate jdbc){
+        this.jdbc = jdbc;
+    }
+
     @Override
     public Super getSuperByID(int superID) {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            final String SQL = "SELECT * FROM Supers WHERE superID = ?";
+            return jdbc.queryForObject(SQL, new SuperMapper(), superID);
+        } catch (DataAccessException ex) {
+            return null;
+        }
     }
 
     @Override
@@ -57,18 +71,18 @@ public class SuperDAOImpl implements SuperDAO{
         return null;
     }
 
-    /*private static final class SuperMapper implements RowMapper<Super> {
+    private static final class SuperMapper implements RowMapper<Super> {
 
         @Override
         public Super mapRow(ResultSet rs, int rowNum) throws SQLException {
             Super sup = new Super();
-            sup.setSuperID(rs.getInt("powerID"));
-            sup.setSuperName(rs.getString("powerName"));
+            sup.setSuperID(rs.getInt("superID"));
+            sup.setSuperName(rs.getString("superName"));
             sup.setSuperDescription(rs.getString("superDescription"));
             
             return sup;
         }
-    }*/
+    }
 
 
 }
