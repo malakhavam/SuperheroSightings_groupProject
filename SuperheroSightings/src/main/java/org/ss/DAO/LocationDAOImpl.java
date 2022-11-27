@@ -37,8 +37,7 @@ public class LocationDAOImpl implements LocationDAO {
 
     @Override
     public Location addNewLocation(Location location) {
-        // TODO Auto-generated method stub
-        return null;
+        return null
     }
 
     @Override
@@ -55,8 +54,8 @@ public class LocationDAOImpl implements LocationDAO {
 
     @Override
     public Boolean deleteLocation(int locationID) {
-        // TODO Auto-generated method stub
-        return null;
+        final String SQL = "DELETE FROM Locations WHERE locationID";
+        return jdbc.update(SQL, locationID) > 0;
     }
 
     @Override
