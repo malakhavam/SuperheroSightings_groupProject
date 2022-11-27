@@ -64,8 +64,11 @@ public class PowerDAOImpl implements PowerDAO {
 
     @Override
     public void deletePower(int powerID) {
-        // TODO Auto-generated method stub
-        return null;
+        final String DELETE_POWER = "DELETE FROM Powers WHERE powerID =?";
+        jdbc.update(DELETE_POWER, powerID);
+
+        final String DELETE_SUPERPOWERS = "DELETE FROM Superpowers WHERE powerID = ?";
+        jdbc.update(DELETE_SUPERPOWERS, powerID);
     }
 
     private static final class PowerMapper implements RowMapper<Power> {
