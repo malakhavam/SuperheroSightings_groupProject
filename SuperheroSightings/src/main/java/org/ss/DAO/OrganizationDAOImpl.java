@@ -69,14 +69,20 @@ public class OrganizationDAOImpl implements OrganizationDAO{
     @Override
     @Transactional
     public void deleteOrganization(int organizationID) {
-        // TODO Auto-generated method stub
-        return null;
+        final String DELETE_ORGANIZATION = "DELETE FROM Organizations WHERE organizationID = ?";
+        jdbc.update(DELETE_ORGANIZATION, organizationID);
+
+        final String DELETE_SUPER_ORGANIZATION = "DELETE FROM SuperOrganizations WHERE organizationID = ?";
+        jdbc.update(DELETE_SUPER_ORGANIZATION, organizationID);
     }
 
     @Override
     public List<Organization> getOrganizationsBySuper(int superID) {
-        // TODO Auto-generated method stub
-        return null;
+        final String SQL = "SELECT Organizations.organizationID, Organizations.organizationName, Organizations.organizationDescription, Organizations.organizationContact"
+        + "FROM SuperOrganizations"
+        + "JOIN Organizations ON SuperOrganizations.organizationID = Organizations.organizationID"
+        + "WHERE SuperOrganizations.superID = ?";
+        return jdbc.query(SQL, new OrganizationMapper(), superID);
     }
 
     private static final class OrganizationMapper implements RowMapper<Organization> {
