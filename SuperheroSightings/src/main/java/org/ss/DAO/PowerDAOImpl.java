@@ -52,8 +52,8 @@ public class PowerDAOImpl implements PowerDAO {
 
     @Override
     public List<Power> getAllPowers() {
-        // TODO Auto-generated method stub
-        return null;
+        final String SQL = "SELECT * FROM Powers";
+        return jdbc.query(SQL, new PowerMapper());
     }
 
     @Override
