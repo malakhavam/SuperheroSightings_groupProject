@@ -16,7 +16,7 @@ public interface OrganizationDAO {
 
     public List<Organization> getAllOrganizations();
 
-    public Boolean updateOrganization(Organization organization);
+    public void updateOrganization(Organization organization);
 
     public void deleteOrganization(int organizationID);
 
