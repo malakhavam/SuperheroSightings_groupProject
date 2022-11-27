@@ -16,9 +16,9 @@ public interface LocationDAO {
 
     public List<Location> getAllLocations();
 
-    public Boolean updateLocation(Location location);
+    public void updateLocation(Location location);
 
-    public Boolean deleteLocation(int locationID);
+    public void deleteLocation(int locationID);
 
     public List<Location> getLocationsBySuper(int superID);
 }

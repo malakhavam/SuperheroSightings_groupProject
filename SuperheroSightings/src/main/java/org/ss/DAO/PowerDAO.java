@@ -19,5 +19,5 @@ public interface PowerDAO {
 
     public Boolean updatePower(Power power);
 
-    public Boolean deletePower(int powerID);
+    public void deletePower(int powerID);
 }

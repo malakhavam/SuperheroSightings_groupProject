@@ -1,5 +1,6 @@
 package org.ss.DTO;
 
+
 import java.time.LocalDate;
 import java.util.Objects;
 import javax.validation.constraints.NotNull;
@@ -34,8 +35,8 @@ public class Sighting {
         return sightingDate;
     }
 
-    public void setSightingDate(LocalDate sightingDate) {
-        this.sightingDate = sightingDate;
+    public void setSightingDate(LocalDate date) {
+        this.sightingDate = date;
     }
 
     public Super getSightingSuper() {
