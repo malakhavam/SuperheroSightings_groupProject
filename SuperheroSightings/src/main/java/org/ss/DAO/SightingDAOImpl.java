@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Transactional;
 import org.ss.DTO.Sighting;
 
 /**
@@ -30,22 +31,29 @@ public class SightingDAOImpl implements SightingDAO{
     public Sighting getSightingByID(int sightingID) {
         try {
             final String SQL = "SELECT * FROM Sightings WHERE sightingID = ?";
-            return jdbc.queryForObject(SQL, new LocationMapper(), sightingID);
+            return jdbc.queryForObject(SQL, new SightingMapper(), sightingID);
         } catch (DataAccessException ex) {
             return null;
         }
     }
 
     @Override
+    @Transactional
     public Sighting addNewSighting(Sighting sighting) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+        final String SQL = "INSERT INTO Sightings(superID, locationID, sightingDate)" +
+            "VALUES(?,?,?)";
+            jdbc.update(SQL,
+            sighting.getSightingDate());
+        
+            int newID = jdbc.queryForObject(SQL, Integer.class);
+            sighting.setSightingID(newID);
+            return sighting;
+        }
 
     @Override
     public List<Sighting> getAllSightings() {
-        // TODO Auto-generated method stub
-        return null;
+        final String SQL = "SELECT * Sightings";
+        return jdbc.query(SQL, new SightingMapper());
     }
 
     @Override
@@ -55,6 +63,7 @@ public class SightingDAOImpl implements SightingDAO{
     }
 
     @Override
+    @Transactional
     public boolean deleteSighting(int sightingID) {
         // TODO Auto-generated method stub
         return false;
