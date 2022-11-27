@@ -1,7 +1,10 @@
 package org.ss.DAO;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.jdbc.core.RowMapper;
 import org.ss.DTO.Super;
 
 /**
@@ -53,6 +56,19 @@ public class SuperDAOImpl implements SuperDAO{
         // TODO Auto-generated method stub
         return null;
     }
+
+    /*private static final class SuperMapper implements RowMapper<Super> {
+
+        @Override
+        public Super mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Super sup = new Super();
+            sup.setSuperID(rs.getInt("powerID"));
+            sup.setSuperName(rs.getString("powerName"));
+            sup.setSuperDescription(rs.getString("superDescription"));
+            
+            return sup;
+        }
+    }*/
 
 
 }
