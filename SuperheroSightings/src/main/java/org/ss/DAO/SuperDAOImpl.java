@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Transactional;
+import org.ss.DTO.Sighting;
 import org.ss.DTO.Super;
 
 /**
@@ -36,9 +38,17 @@ public class SuperDAOImpl implements SuperDAO{
     }
 
     @Override
+    @Transactional
     public Super addNewSuper(Super sup) {
-        // TODO Auto-generated method stub
-        return null;
+        final String SQL = "INSERT INTO Supers(superName, superDescription)" + 
+            "VALUES(?,?)";
+            jdbc.update(SQL, 
+            sup.getSuperName(),
+            sup.getSuperDescription());
+
+            int newID = jdbc.queryForObject(SQL, Integer.class);
+            sup.setSuperID(newID);
+            return sup;
     }
 
     @Override
@@ -48,15 +58,16 @@ public class SuperDAOImpl implements SuperDAO{
     }
 
     @Override
-    public Boolean updateSuper(Super sup) {
+    public void updateSuper(Super sup) {
         // TODO Auto-generated method stub
-        return null;
+        
     }
 
     @Override
-    public Boolean deleteSuper(int superID) {
+    @Transactional
+    public void deleteSuper(int superID) {
         // TODO Auto-generated method stub
-        return null;
+        
     }
 
     @Override
