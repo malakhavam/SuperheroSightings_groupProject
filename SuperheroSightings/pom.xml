@@ -11,7 +11,7 @@
     <groupId>com.ss</groupId>
     <artifactId>SuperheroSighting</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <description>Project to track sightings of supers.</description>
+    <description>Project to track sightings of superhero's.</description>
 
     <properties>
         <java.version>1.8</java.version>

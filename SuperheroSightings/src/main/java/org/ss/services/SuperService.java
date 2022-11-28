@@ -1,6 +1,7 @@
 package org.ss.services;
 
 import org.ss.DTO.Super;
+
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
 
 public interface SuperService {
 
-    public Super create(Super s);
+    public Super create(Super sup);
 
     public List<Super> readAll();
 
@@ -21,7 +22,7 @@ public interface SuperService {
 
     public List<Super> readSupersByLocation(int locationID);
 
-    public void update(Super s);
+    public void update(Super sup);
 
     public void delete(int superID);
 
