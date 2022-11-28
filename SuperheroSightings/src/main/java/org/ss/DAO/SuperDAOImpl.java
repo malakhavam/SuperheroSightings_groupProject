@@ -46,7 +46,7 @@ public class SuperDAOImpl implements SuperDAO{
             sup.getSuperName(),
             sup.getSuperDescription());
 
-            int newID = jdbc.queryForObject(SQL, Integer.class);
+            int newID = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
             sup.setSuperID(newID);
             return sup;
     }

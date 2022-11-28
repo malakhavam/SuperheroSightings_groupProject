@@ -45,7 +45,7 @@ public class SightingDAOImpl implements SightingDAO{
             jdbc.update(SQL,
             sighting.getSightingDate());
         
-            int newID = jdbc.queryForObject(SQL, Integer.class);
+            int newID = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
             sighting.setSightingID(newID);
             return sighting;
         }
