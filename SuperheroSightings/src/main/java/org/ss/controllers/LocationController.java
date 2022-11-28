@@ -1,9 +1,12 @@
 package org.ss.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.ss.DAO.LocationDAO;
 
 import javax.validation.Valid;
 import javax.validation.Validation;
@@ -15,8 +18,17 @@ import java.util.List;
  *
  */
 
-
+@RestController
 public class LocationController {
+
+    
+    private final LocationDAO locationDao;
+
+    public LocationController(LocationDAO locationDao) {
+        this.locationDao = locationDao;
+    }
+
+    
 
     /*
     @PostMapping("/addLocation")
