@@ -1,4 +1,4 @@
-package Data;
+package supersightings.Data;
 
 public class LocationDaoTest {
     

@@ -49,7 +49,7 @@ public class LocationDAOImpl implements LocationDAO {
             location.getLocationLatitude(),
             location.getLocationLongitude());
 
-            int newID = jdbc.queryForObject(SQL, Integer.class);
+            int newID = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
             location.setLocationID(newID);
             return location;
     }
