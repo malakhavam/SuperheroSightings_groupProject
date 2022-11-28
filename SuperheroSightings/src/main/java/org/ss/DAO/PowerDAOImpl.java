@@ -45,7 +45,7 @@ public class PowerDAOImpl implements PowerDAO {
             power.getPowerName(),
             power.getPowerDescription());
 
-            int newID = jdbc.queryForObject(SQL, Integer.class);
+            int newID = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
             power.setPowerID(newID);
             return power;
     }

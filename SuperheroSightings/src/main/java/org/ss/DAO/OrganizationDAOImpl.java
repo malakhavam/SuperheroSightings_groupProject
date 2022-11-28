@@ -46,7 +46,7 @@ public class OrganizationDAOImpl implements OrganizationDAO{
                 organization.getOrganizationDescription(),
                 organization.getOrganizationContact());
 
-                int newID = jdbc.queryForObject(SQL, Integer.class);
+                int newID = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
                 organization.setOrganizationID(newID);
                 return organization;
     }
