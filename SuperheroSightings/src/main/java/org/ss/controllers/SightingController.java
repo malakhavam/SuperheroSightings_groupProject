@@ -4,8 +4,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.ss.DAO.LocationDAO;
-import org.ss.DAO.SightingDAO;
 
 import javax.validation.Valid;
 import javax.validation.Validation;
@@ -19,12 +17,6 @@ import java.util.List;
 
 
 public class SightingController {
-
-    private final SightingDAO sightingDao;
-
-    public SightingController(SightingDAO sightingDao) {
-        this.sightingDao = sightingDao;
-    }
 
     /*
     @PostMapping("/addLocation")

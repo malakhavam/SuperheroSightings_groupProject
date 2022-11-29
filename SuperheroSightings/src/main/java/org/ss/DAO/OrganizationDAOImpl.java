@@ -18,7 +18,7 @@ import org.ss.DTO.Organization;
 
 
 public class OrganizationDAOImpl implements OrganizationDAO{
-    
+
     private final JdbcTemplate jdbc;
 
     @Autowired
@@ -40,15 +40,15 @@ public class OrganizationDAOImpl implements OrganizationDAO{
     @Transactional
     public Organization addNewOrganization(Organization organization) {
         final String SQL = "INSERT INTO Organization(organizationName, organizationDescription, OrganizationContact" +
-            "VALUES(?,?,?)";
-            jdbc.update(
+                "VALUES(?,?,?)";
+        jdbc.update(SQL,
                 organization.getOrganizationName(),
                 organization.getOrganizationDescription(),
                 organization.getOrganizationContact());
 
-                int newID = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-                organization.setOrganizationID(newID);
-                return organization;
+        int newID = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        organization.setOrganizationID(newID);
+        return organization;
     }
 
     @Override
@@ -61,9 +61,9 @@ public class OrganizationDAOImpl implements OrganizationDAO{
     public void updateOrganization(Organization organization) {
         final String SQL = "UPDATE Organizations SET organizationName = ?, organizationDescription = ?, organizationContact = ? WHERE organizationID = ?";
         jdbc.update(SQL,
-            organization.getOrganizationName(),
-            organization.getOrganizationDescription(),
-            organization.getOrganizationContact());
+                organization.getOrganizationName(),
+                organization.getOrganizationDescription(),
+                organization.getOrganizationContact());
     }
 
     @Override
@@ -79,9 +79,9 @@ public class OrganizationDAOImpl implements OrganizationDAO{
     @Override
     public List<Organization> getOrganizationsBySuper(int superID) {
         final String SQL = "SELECT Organizations.organizationID, Organizations.organizationName, Organizations.organizationDescription, Organizations.organizationContact"
-        + "FROM SuperOrganizations"
-        + "JOIN Organizations ON SuperOrganizations.organizationID = Organizations.organizationID"
-        + "WHERE SuperOrganizations.superID = ?";
+                + "FROM SuperOrganizations"
+                + "JOIN Organizations ON SuperOrganizations.organizationID = Organizations.organizationID"
+                + "WHERE SuperOrganizations.superID = ?";
         return jdbc.query(SQL, new OrganizationMapper(), superID);
     }
 

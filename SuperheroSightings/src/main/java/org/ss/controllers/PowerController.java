@@ -4,8 +4,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.ss.DAO.LocationDAO;
-import org.ss.DAO.PowerDAO;
 
 import javax.validation.Valid;
 import javax.validation.Validation;
@@ -19,12 +17,6 @@ import java.util.List;
 
 
 public class PowerController {
-
-    private final PowerDAO powerDao;
-
-    public PowerController(LocationDAO locationDao) {
-        this.locationDao = locationDao;
-    }
 
     /*
     @PostMapping("/addLocation")

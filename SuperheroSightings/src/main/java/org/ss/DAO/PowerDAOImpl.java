@@ -40,14 +40,14 @@ public class PowerDAOImpl implements PowerDAO {
     @Transactional
     public Power addNewPower(Power power) {
         final String SQL = "INSERT INTO Powers(powerName, powerDescription)" +
-            "VALUES(?,?)";
-            jdbc.update(SQL,
-            power.getPowerName(),
-            power.getPowerDescription());
+                "VALUES(?,?)";
+        jdbc.update(SQL,
+                power.getPowerName(),
+                power.getPowerDescription());
 
-            int newID = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-            power.setPowerID(newID);
-            return power;
+        int newID = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        power.setPowerID(newID);
+        return power;
     }
 
     @Override
@@ -59,9 +59,9 @@ public class PowerDAOImpl implements PowerDAO {
     @Override
     public Boolean updatePower(Power power) {
         final String SQL = "UPDATE Powers SET powerName = ?, powerDescription = ? WHERE powerID = ?";
-        return jdbc.update(SQL, 
-            power.getPowerName(),
-            power.getPowerDescription())>0;
+        return jdbc.update(SQL,
+                power.getPowerName(),
+                power.getPowerDescription())>0;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class PowerDAOImpl implements PowerDAO {
             power.setPowerID(rs.getInt("powerID"));
             power.setPowerName(rs.getString("powerName"));
             power.setPowerDescription(rs.getString("powerDescription"));
-            
+
             return power;
         }
     }

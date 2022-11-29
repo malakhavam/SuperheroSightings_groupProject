@@ -20,5 +20,7 @@ public interface SuperDAO {
 
     public void deleteSuper(int superID);
 
+    public List<Super> getAllSupersByOrganization(int organizationID);
+
     public List<Super> getSupersByLocation(int locationID);
 }
