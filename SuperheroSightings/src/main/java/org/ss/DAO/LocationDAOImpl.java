@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.ss.DTO.Location;
+import org.ss.DTO.Super;
 
 /**
  *@author : Claude Seide, Everlyn Leon, Mariya Malakhava, Neyssa Cadet
@@ -75,7 +76,7 @@ public class LocationDAOImpl implements LocationDAO {
     @Override
     //@Transactional
     public void deleteLocation(int locationID) {
-        final String DELETE_LOCATION = "DELETE FROM Locations WHERE locationID =?";
+        final String DELETE_LOCATION = "DELETE FROM Locations WHERE locationID = ?";
         jdbc.update(DELETE_LOCATION, locationID);
 
         final String DELETE_SIGHTING = "DELETE FROM Sightings WHERE locationID = ?";
@@ -83,13 +84,15 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     @Override
-    public List<Location> getLocationsBySuper(int superID) {
+    public List<Location> getLocationsBySuper(Super sup) {
         final String SQL = "SELECT Locations.locationID, Locations.locationName, Locations.locationDescription, Locations.locationAddress, Locations.locationLatitude, Locations.locationLongitude"
-                + "FROM Sightings"
-                + "JOIN Location ON Sightings.locationID = Locations.locationID"
+                + "FROM Locations"
+                + "JOIN Sightings ON Sightings.locationID = Locations.locationID"
                 + "WHERE Sightings.superID = ?";
-        return jdbc.query(SQL, new LocationMapper(), superID);
+        List<Location> locations = jdbc.query(SQL, new LocationMapper(), sup.getSuperID());
+        return locations;
     }
+
 
     private static final class LocationMapper implements RowMapper<Location> {
 

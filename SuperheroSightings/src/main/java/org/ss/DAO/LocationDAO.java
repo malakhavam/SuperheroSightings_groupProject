@@ -1,6 +1,8 @@
 package org.ss.DAO;
 
 import org.ss.DTO.Location;
+import org.ss.DTO.Super;
+
 import java.util.List;
 
 /**
@@ -20,5 +22,5 @@ public interface LocationDAO {
 
     public void deleteLocation(int locationID);
 
-    public List<Location> getLocationsBySuper(int superID);
+    public List<Location> getLocationsBySuper(Super sup);
 }
