@@ -40,15 +40,15 @@ public class SuperDAOImpl implements SuperDAO{
     @Override
     @Transactional
     public Super addNewSuper(Super sup) {
-        final String SQL = "INSERT INTO Supers(superName, superDescription)" + 
-            "VALUES(?,?)";
-            jdbc.update(SQL, 
-            sup.getSuperName(),
-            sup.getSuperDescription());
+        final String SQL = "INSERT INTO Supers(superName, superDescription)" +
+                "VALUES(?,?)";
+        jdbc.update(SQL,
+                sup.getSuperName(),
+                sup.getSuperDescription());
 
-            int newID = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-            sup.setSuperID(newID);
-            return sup;
+        int newID = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        sup.setSuperID(newID);
+        return sup;
     }
 
     @Override
@@ -60,16 +60,22 @@ public class SuperDAOImpl implements SuperDAO{
     @Override
     public void updateSuper(Super sup) {
         final String SQL = "UPDATE Supers SET superName = ?, superDescription = ? WHERE superID = ?";
-        jdbc.update(SQL, 
-        sup.getSuperName(),
-        sup.getSuperDescription());
+        jdbc.update(SQL,
+                sup.getSuperName(),
+                sup.getSuperDescription());
     }
 
     @Override
     @Transactional
     public void deleteSuper(int superID) {
         // TODO Auto-generated method stub
-        
+
+    }
+
+    @Override
+    public List<Super> getAllSupersByOrganization(int organizationID) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
@@ -86,7 +92,7 @@ public class SuperDAOImpl implements SuperDAO{
             sup.setSuperID(rs.getInt("superID"));
             sup.setSuperName(rs.getString("superName"));
             sup.setSuperDescription(rs.getString("superDescription"));
-            
+
             return sup;
         }
     }

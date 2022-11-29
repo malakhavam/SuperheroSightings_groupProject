@@ -41,14 +41,14 @@ public class SightingDAOImpl implements SightingDAO{
     @Transactional
     public Sighting addNewSighting(Sighting sighting) {
         final String SQL = "INSERT INTO Sightings(superID, locationID, sightingDate)" +
-            "VALUES(?,?,?)";
-            jdbc.update(SQL,
-            sighting.getSightingDate());
-        
-            int newID = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-            sighting.setSightingID(newID);
-            return sighting;
-        }
+                "VALUES(?,?,?)";
+        jdbc.update(SQL,
+                sighting.getSightingDate());
+
+        int newID = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        sighting.setSightingID(newID);
+        return sighting;
+    }
 
     @Override
     public List<Sighting> getAllSightings() {
@@ -57,16 +57,16 @@ public class SightingDAOImpl implements SightingDAO{
     }
 
     @Override
-    public boolean updateSighting(Sighting sighting) {
-        // TODO Auto-generated method stub
-        return false;
+    public void updateSighting(Sighting sighting) {
+        final String SQL = "UPDATE Sightings SET sightingDate = ? WHERE sighting ID = ?";
+        jdbc.update(SQL,
+                sighting.getSightingDate());
     }
 
     @Override
     @Transactional
-    public boolean deleteSighting(int sightingID) {
+    public void deleteSighting(int sightingID) {
         // TODO Auto-generated method stub
-        return false;
     }
 
     @Override
@@ -82,7 +82,7 @@ public class SightingDAOImpl implements SightingDAO{
             Sighting sighting = new Sighting();
             sighting.setSightingID(rs.getInt("sightingID"));
             sighting.setSightingDate(rs.getDate("sightingDate").toLocalDate());
-                       
+
             return sighting;
         }
     }

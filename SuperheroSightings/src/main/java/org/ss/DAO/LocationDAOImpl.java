@@ -38,20 +38,21 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     @Override
-    @Transactional
+    //@Transactional
     public Location addNewLocation(Location location) {
-        final String SQL = "INSERT INTO Locations(locationName, locationDescription, locationAddress, locationLatitude, locationLongitude" +
-            "VALUES(?,?,?,?,?)";
-            jdbc.update(SQL,
-            location.getLocationName(),
-            location.getLocationDescription(),
-            location.getLocationAddress(),
-            location.getLocationLatitude(),
-            location.getLocationLongitude());
+        final String SQL = "INSERT INTO Locations(locationID, locationName, locationDescription, locationAddress, locationLatitude, locationLongitude)" +
+                "VALUES(?,?,?,?,?,?);";
+        jdbc.update(SQL,
+                location.getLocationID(),
+                location.getLocationName(),
+                location.getLocationDescription(),
+                location.getLocationAddress(),
+                location.getLocationLatitude(),
+                location.getLocationLongitude());
 
-            int newID = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-            location.setLocationID(newID);
-            return location;
+        int newID = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        location.setLocationID(newID);
+        return location;
     }
 
     @Override
@@ -63,16 +64,16 @@ public class LocationDAOImpl implements LocationDAO {
     @Override
     public void updateLocation(Location location) {
         final String SQL = "UPDATE Locations SET locationName = ?, locationDescription = ?, locationAddress = ?, locationLatitude = ?, locationLongitude = ? WHERE locationID = ?";
-        jdbc.update(SQL, 
-            location.getLocationName(),
-            location.getLocationDescription(),
-            location.getLocationAddress(),
-            location.getLocationLatitude(),
-            location.getLocationLongitude());
+        jdbc.update(SQL,
+                location.getLocationName(),
+                location.getLocationDescription(),
+                location.getLocationAddress(),
+                location.getLocationLatitude(),
+                location.getLocationLongitude());
     }
 
     @Override
-    @Transactional
+    //@Transactional
     public void deleteLocation(int locationID) {
         final String DELETE_LOCATION = "DELETE FROM Locations WHERE locationID =?";
         jdbc.update(DELETE_LOCATION, locationID);
@@ -84,9 +85,9 @@ public class LocationDAOImpl implements LocationDAO {
     @Override
     public List<Location> getLocationsBySuper(int superID) {
         final String SQL = "SELECT Locations.locationID, Locations.locationName, Locations.locationDescription, Locations.locationAddress, Locations.locationLatitude, Locations.locationLongitude"
-        + "FROM Sightings"
-        + "JOIN Location ON Sightings.locationID = Locations.locationID"
-        + "WHERE Sightings.superID = ?";
+                + "FROM Sightings"
+                + "JOIN Location ON Sightings.locationID = Locations.locationID"
+                + "WHERE Sightings.superID = ?";
         return jdbc.query(SQL, new LocationMapper(), superID);
     }
 
