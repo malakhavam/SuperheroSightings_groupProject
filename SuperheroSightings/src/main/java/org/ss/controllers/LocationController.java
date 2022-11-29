@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/api/location")
+@RequestMapping("/api")
 public class LocationController {
 
     

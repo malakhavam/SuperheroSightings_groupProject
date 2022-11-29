@@ -11,5 +11,5 @@ import org.springframework.context.annotation.FilterType;
         value = CommandLineRunner.class))
 @EnableAutoConfiguration
 public class TestApplicationConfiguration {
-}
 
+}

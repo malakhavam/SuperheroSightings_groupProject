@@ -38,11 +38,12 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     @Override
-    @Transactional
+    //@Transactional
     public Location addNewLocation(Location location) {
-        final String SQL = "INSERT INTO Locations(locationName, locationDescription, locationAddress, locationLatitude, locationLongitude" +
-            "VALUES(?,?,?,?,?)";
+        final String SQL = "INSERT INTO Locations(locationID, locationName, locationDescription, locationAddress, locationLatitude, locationLongitude)" +
+            "VALUES(?,?,?,?,?,?);";
             jdbc.update(SQL,
+                    location.getLocationID(),
             location.getLocationName(),
             location.getLocationDescription(),
             location.getLocationAddress(),
@@ -72,7 +73,7 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     @Override
-    @Transactional
+    //@Transactional
     public void deleteLocation(int locationID) {
         final String DELETE_LOCATION = "DELETE FROM Locations WHERE locationID =?";
         jdbc.update(DELETE_LOCATION, locationID);
