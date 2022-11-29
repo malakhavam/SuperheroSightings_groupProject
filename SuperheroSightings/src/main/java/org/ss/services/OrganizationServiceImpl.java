@@ -25,11 +25,6 @@ public class OrganizationServiceImpl implements OrganizationService{
     }
 
     @Override
-    public List<Organization> readAll() {
-        return organizationDAO.getAllOrganizations();
-    }
-
-    @Override
     public Organization readByID(int organizationID) {
         return organizationDAO.getOrganizationByID(organizationID);
     }
@@ -37,6 +32,11 @@ public class OrganizationServiceImpl implements OrganizationService{
     @Override
     public List<Organization> readAllBySuper(int superID) {
         return organizationDAO.getOrganizationsBySuper(superID);
+    }
+
+    @Override
+    public List<Organization> readAll() {
+        return organizationDAO.getAllOrganizations();
     }
 
     @Override

@@ -4,6 +4,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.ss.DAO.LocationDAO;
+import org.ss.DAO.OrganizationDAO;
 
 import javax.validation.Valid;
 import javax.validation.Validation;
@@ -17,6 +19,12 @@ import java.util.List;
 
 
 public class OrganizationController {
+
+    private final OrganizationDAO organizationDao;
+
+    public OrganizationController(OrganizationDAO organizationDao) {
+        this.organizationDao = organizationDao;
+    }
 
     /*
     @PostMapping("/addOrganization")

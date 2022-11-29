@@ -20,8 +20,8 @@ public class LocationServiceImpl implements LocationService{
     LocationDAO locationDAO;
 
     @Override
-    public Location readByID(int locationID) {
-        return locationDAO.getLocationByID(locationID);
+    public Location create(Location location) {
+        return locationDAO.addNewLocation(location);
     }
 
     @Override
@@ -30,13 +30,13 @@ public class LocationServiceImpl implements LocationService{
     }
 
     @Override
-    public List<Location> readLocationsBySuper(int superID) {
-        return locationDAO.getLocationsBySuper(superID);
+    public Location readByID(int locationID) {
+        return locationDAO.getLocationByID(locationID);
     }
 
     @Override
-    public Location create(Location location) {
-        return locationDAO.addNewLocation(location);
+    public List<Location> readLocationsBySuper(int superID) {
+        return locationDAO.getLocationsBySuper(superID);
     }
 
     @Override
