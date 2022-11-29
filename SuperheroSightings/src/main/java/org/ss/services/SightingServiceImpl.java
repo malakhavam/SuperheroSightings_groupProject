@@ -15,7 +15,40 @@ import org.springframework.stereotype.Service;
  */
 
 
-public class SightingServiceImpl {
+public class SightingServiceImpl implements SightingService {
+
+    @Autowired
+    SightingDAO sightingDAO;
+
+    @Override
+    public Sighting create(Sighting sighting) {
+        return sightingDAO.addNewSighting(sighting);
+    }
+
+    @Override
+    public List<Sighting> readAll() {
+        return sightingDAO.getAllSightings();
+    }
+
+    @Override
+    public Sighting readByID(int sightingID) {
+        return sightingDAO.getSightingByID(sightingID);
+    }
+
+    @Override
+    public List<Sighting> readSightingsByDate(LocalDate date) {
+        return sightingDAO.getSightingsByDate(date);
+    }
+
+    @Override
+    public void update(Sighting sighting) {
+        sightingDAO.updateSighting(sighting);
+    }
+
+    @Override
+    public void delete(int sightingID) {
+        sightingDAO.deleteSighting(sightingID);
+    }
 
 
 }

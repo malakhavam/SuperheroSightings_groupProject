@@ -18,8 +18,6 @@ public interface SuperService {
 
     public Super readByID(int superID);
 
-    public List<Super> readSupersByOrganization(int organizationID);
-
     public List<Super> readSupersByLocation(int locationID);
 
     public void update(Super sup);

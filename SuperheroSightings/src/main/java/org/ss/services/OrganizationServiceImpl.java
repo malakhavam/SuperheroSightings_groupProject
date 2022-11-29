@@ -14,7 +14,40 @@ import org.springframework.stereotype.Service;
  */
 
 
-public class OrganizationServiceImpl {
+public class OrganizationServiceImpl implements OrganizationService{
+
+    @Autowired
+    OrganizationDAO organizationDAO;
+
+    @Override
+    public Organization create(Organization organization) {
+        return organizationDAO.addNewOrganization(organization);
+    }
+
+    @Override
+    public List<Organization> readAll() {
+        return organizationDAO.getAllOrganizations();
+    }
+
+    @Override
+    public Organization readByID(int organizationID) {
+        return organizationDAO.getOrganizationByID(organizationID);
+    }
+
+    @Override
+    public List<Organization> readAllBySuper(int superID) {
+        return organizationDAO.getOrganizationsBySuper(superID);
+    }
+
+    @Override
+    public void update(Organization organization) {
+        organizationDAO.updateOrganization(organization);
+    }
+
+    @Override
+    public void delete(int organizationID) {
+        organizationDAO.deleteOrganization(organizationID);
+    }
 
 
 }

@@ -13,11 +13,11 @@ public interface OrganizationService {
 
     public Organization create(Organization organization);
 
-    public List<Organization> readAll();
-
     public Organization readByID(int organizationID);
 
     public List<Organization> readAllBySuper(int superID);
+
+    public List<Organization> readAll();
 
     public void update(Organization organization);
 

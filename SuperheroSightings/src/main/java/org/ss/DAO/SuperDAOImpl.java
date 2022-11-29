@@ -73,12 +73,6 @@ public class SuperDAOImpl implements SuperDAO{
     }
 
     @Override
-    public List<Super> getAllSupersByOrganization(int organizationID) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public List<Super> getSupersByLocation(int locationID) {
         // TODO Auto-generated method stub
         return null;
