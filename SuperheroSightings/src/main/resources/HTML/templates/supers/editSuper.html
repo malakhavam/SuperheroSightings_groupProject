@@ -7,6 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
     <title>Superhero Sightings</title>
   </head>
   <body>
@@ -22,45 +23,45 @@
         <!-- END Page header -->
         <!-- Navbar -->
         <div class="row m-4 border border-dark">
-             <div class="col text-center m-2">
-                <a href="../index.html" class="btn btn-outline-primary btn-lg">Home</a>
-             </div>
-            
             <div class="col text-center m-2">
-                <a href="../heroes.html" class="btn btn-outline-primary btn-lg">Heroes</a>
+               <a href="" class="btn btn-outline-secondary btn-lg">Home</a>
             </div>
-            
-            <div class="col text-center m-2">
-                <a href="../superpowers.html" class="btn btn-outline-primary btn-lg">Superpowers</a>
-            </div>
-            
-            <div class="col text-center m-2">
-                <a href="../locations.html" class="btn btn-outline-primary btn-lg">Locations</a>
-            </div>
-            
-            <div class="col text-center m-2">
-                <a href="../organizations.html" class="btn btn-outline-primary btn-lg">Organizations</a>
-            </div>
-            
-            <div class="col text-center m-2">
-                <a href="../sightings.html" class="btn btn-outline-primary btn-lg">Sightings</a>
-            </div>           
-        </div>
+           
+           <div class="col text-center m-2">
+               <a href="supers.html" class="btn btn-outline-primary btn-lg">Supers</a>
+           </div>
+           
+           <div class="col text-center m-2">
+               <a href="powers.html" class="btn btn-outline-primary btn-lg">Powers</a>
+           </div>
+           
+           <div class="col text-center m-2">
+               <a href="locations.html" class="btn btn-outline-primary btn-lg">Locations</a>
+           </div>
+           
+           <div class="col text-center m-2">
+               <a href="organizations.html" class="btn btn-outline-primary btn-lg">Organizations</a>
+           </div>
+           
+           <div class="col text-center m-2">
+               <a href="sightings.html" class="btn btn-outline-primary btn-lg">Sightings</a>
+           </div>           
+       </div>
         <!-- END Navbar -->
         <!-- Add form -->
         <div class="row m-4 border border-dark">
             <div class="col-3 text-center m-3">
-                <span class="h3">Add Hero</span>
+                <span class="h3">Edit Hero</span>
             </div>
-            
             <div class="col-7 text-center m-3">
-                <form action="/heroes/addHero" method="POST" enctype="multipart/form-data">
+                <form action="/heroes/editHero" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="heroId" th:value="${hero.id}" id="heroId"/>
                     
                     <div class="form-group row">
                         <label for="heroName" class="col-3 col-form-label">
                             Hero Name</label>
                         <div class="col-9">
-                            <input type="text" name="heroName" 
+                            <input type="text" name="heroName" th:value="${hero.name}"
                                    id="heroName" class="form-control"/>
                             <div class="text-center" 
                                 th:if="${!errors.isEmpty()}">
@@ -75,9 +76,9 @@
                         <label for="isHero" class="col-3 col-form-label">
                             Hero type</label>
                         <div class="col-9">
-                            <select id="isHero" name="isHero" class="form-control" >
-                                <option value="true">Superhero</option>
-                                <option value="false">Supervillain</option>
+                            <select id="isHero" name="isHero" class="form-control">
+                                <option value="true" th:selected="${hero.isHero}">Superhero</option>
+                                <option value="false" th:selected="${!hero.isHero}">Supervillain</option>
                             </select>
                         </div>
                     </div>
@@ -86,14 +87,8 @@
                         <label for="heroDescription" class="col-3 col-form-label">
                             Hero Description</label>
                         <div class="col-9">
-                            <textarea type="textarea" name="heroDescription" 
-                                id="heroDescription" class="form-control"></textarea>
-                            <div class="text-center" 
-                                th:if="${!errors.isEmpty()}">
-                                <p class="alert alert-danger" th:each="error : ${errors}" 
-                                    th:text="${error.message}"
-                                    th:if="${error.getPropertyPath().toString().equals('description')}">Error message</p>
-                            </div>
+                            <textarea type="textarea" name="heroDescription" th:text="${hero.description}"
+                                      id="heroDescription" class="form-control"></textarea>
                         </div>
                     </div>
                     
@@ -104,7 +99,8 @@
                             <select multiple id="superpowerId" name="superpowerId" class="form-control" >
                                 <option th:each="superpower : ${superpowers}" 
                                         th:value="${superpower.id}" 
-                                        th:text="${superpower.name}">
+                                        th:text="${superpower.name}"
+                                        th:selected="${hero.superpowers.contains(superpower)}">
                                     Superpower Name</option>
                             </select>
                         </div>
@@ -120,10 +116,10 @@
                     
                     <div class="row m-4">
                         <div class="col text-center m-4">
-                            <a href="../heroes.html" class="btn btn-outline-primary btn-lg">Go Back</a>
+                            <a href="/heroes" class="btn btn-outline-primary btn-lg">Go Back</a>
                         </div> 
 
-                        <button type="submit" class="col m-4 btn btn-primary btn-lg">Add Hero</button>
+                        <button type="submit" class="col m-4 btn btn-primary btn-lg">Edit Hero</button>
                     </div>
                     
                 </form>
