@@ -1,6 +1,7 @@
 package supersightings.Data;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -85,5 +86,27 @@ public class LocationDaoTest {
         assertTrue(teachers.contains(location2));
     }
 
+    @Test
+    public void testUpdateLocation() {
+        Location location = new Location();
+        location.setLocationName("Test Location Name");
+        location.setLocationDescription("Test Location Description");
+        location.setLocationAddress("Test Location Address");
+        location.setLocationLatitude("Test Location Latitude");
+        location.setLocationLongitude("Test Location Longitude");
+        location = locationDao.addNewLocation(location);
+
+        Location fromDao = locationDao.getLocationByID(location.getLocationID());
+        assertEquals(location, fromDao);
+
+        location.setLocationName("New Test First");
+        locationDao.updateLocation(location);
+
+        assertNotEquals(location, fromDao);
+
+        fromDao = locationDao.getLocationByID(location.getLocationID());
+
+        assertEquals(location, fromDao);
+    }
 
 }
