@@ -4,23 +4,35 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.ss.DAO.LocationDAO;
 import org.ss.DTO.Location;
+import org.ss.TestApplicationConfiguration;
 
-@SpringBootTest
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(classes = TestApplicationConfiguration.class)
 public class LocationDaoTest {
 
-    @Autowired 
+    @Autowired
     LocationDAO locationDao;
 
     public LocationDaoTest() {
     }
 
-    @Before 
+    @BeforeAll
+    public static void setUpClass() {
+    }
+
+    @AfterAll
+    public static void tearDownClass() {
+    }
+
+    @BeforeEach
     public void setUp() {
         List<Location> locations = locationDao.getAllLocations();
         for(Location location : locations) {
@@ -28,19 +40,23 @@ public class LocationDaoTest {
         }
     }
 
+    @AfterEach
+    public void tearDown() {
+    }
+
     @Test
     public void testAddAndGetLocation() {
         Location location = new Location();
-            location.getLocationName();
-            location.getLocationDescription();
-            location.getLocationAddress();
-            location.getLocationLatitude();
-            location.getLocationLongitude();
+        location.setLocationName("Test Location Name");
+        location.setLocationDescription("Test Location Name");
+        location.setLocationAddress("Test Location Name");
+        location.setLocationLatitude("Test Location Name");
+        location.setLocationLongitude("Test Location Name");
         location = locationDao.addNewLocation(location);
-        
+
         Location fromDao = locationDao.getLocationByID(location.getLocationID());
-        
+
         assertEquals(location, fromDao);
     }
-    
+
 }
