@@ -57,16 +57,16 @@ public class SightingDAOImpl implements SightingDAO{
     }
 
     @Override
-    public boolean updateSighting(Sighting sighting) {
-        // TODO Auto-generated method stub
-        return false;
+    public void updateSighting(Sighting sighting) {
+        final String SQL = "UPDATE Sightings SET sightingDate = ? WHERE sighting ID = ?";
+        jdbc.update(SQL, 
+            sighting.getSightingDate());
     }
 
     @Override
     @Transactional
-    public boolean deleteSighting(int sightingID) {
+    public void deleteSighting(int sightingID) {
         // TODO Auto-generated method stub
-        return false;
     }
 
     @Override
