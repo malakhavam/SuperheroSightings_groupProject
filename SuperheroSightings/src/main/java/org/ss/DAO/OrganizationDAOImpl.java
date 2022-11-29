@@ -41,7 +41,7 @@ public class OrganizationDAOImpl implements OrganizationDAO{
     public Organization addNewOrganization(Organization organization) {
         final String SQL = "INSERT INTO Organization(organizationName, organizationDescription, OrganizationContact" +
             "VALUES(?,?,?)";
-            jdbc.update(
+            jdbc.update(SQL,
                 organization.getOrganizationName(),
                 organization.getOrganizationDescription(),
                 organization.getOrganizationContact());
