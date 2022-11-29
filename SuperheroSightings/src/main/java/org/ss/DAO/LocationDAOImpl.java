@@ -40,10 +40,9 @@ public class LocationDAOImpl implements LocationDAO {
     @Override
     //@Transactional
     public Location addNewLocation(Location location) {
-        final String SQL = "INSERT INTO Locations(locationID, locationName, locationDescription, locationAddress, locationLatitude, locationLongitude) " +
-                "VALUES(?,?,?,?,?,?);";
+        final String SQL = "INSERT INTO Locations(locationName, locationDescription, locationAddress, locationLatitude, locationLongitude) " +
+                "VALUES(?,?,?,?,?);";
         jdbc.update(SQL,
-                location.getLocationID(),
                 location.getLocationName(),
                 location.getLocationDescription(),
                 location.getLocationAddress(),
@@ -69,7 +68,8 @@ public class LocationDAOImpl implements LocationDAO {
                 location.getLocationDescription(),
                 location.getLocationAddress(),
                 location.getLocationLatitude(),
-                location.getLocationLongitude());
+                location.getLocationLongitude(),
+                location.getLocationID());
     }
 
     @Override
