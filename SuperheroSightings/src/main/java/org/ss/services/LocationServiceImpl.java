@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.ss.DTO.Super;
 
 /**
  *@author : Claude Seide, Everlyn Leon, Mariya Malakhava, Neyssa Cadet
@@ -35,8 +36,8 @@ public class LocationServiceImpl implements LocationService{
     }
 
     @Override
-    public List<Location> readLocationsBySuper(int superID) {
-        return locationDAO.getLocationsBySuper(superID);
+    public List<Location> readLocationsBySuper(Super sup) {
+        return locationDAO.getLocationsBySuper(sup);
     }
 
     @Override
