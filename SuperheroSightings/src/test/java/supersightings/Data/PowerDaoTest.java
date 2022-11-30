@@ -12,6 +12,7 @@ import org.ss.TestApplicationConfiguration;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
@@ -104,5 +105,25 @@ public class PowerDaoTest {
         assertEquals(2, powers.size());
         assertTrue(powers.contains(power));
         assertTrue(powers.contains(power2));
+    }
+
+    @Test
+    public void testUpdatePower(){
+        Power power = new Power();
+        power.setPowerName("Test Power Name");
+        power.setPowerDescription("Test Power Description");
+        power = powerDao.addNewPower(power);
+
+        Power fromDao = powerDao.getPowerByID(power.getPowerID());
+        assertEquals(power,fromDao);
+
+        power.setPowerName("New Test Name");
+        powerDao.updatePower(power);
+
+        assertNotEquals(power, fromDao);
+
+        fromDao = powerDao.getPowerByID(power.getPowerID());
+
+        assertEquals(power, fromDao);
     }
 }
