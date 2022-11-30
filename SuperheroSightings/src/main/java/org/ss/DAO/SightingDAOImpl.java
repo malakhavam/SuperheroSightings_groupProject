@@ -90,13 +90,13 @@ public class SightingDAOImpl implements SightingDAO{
 
     @Override
     public List<Sighting> getSightingsForLocation(Location location){
-    final String SQL = "SELECT * FROM Sighting WHERE locationID = ?";
+    final String SQL = "SELECT * FROM Sightings WHERE locationID = ?";
     List<Sighting> sighting = jdbc.query(SQL, new SightingMapper(), location.getLocationID());
     associateLocationsForSightings(sighting);
         return sighting;
     }
 
-    private static final class SightingMapper implements RowMapper<Sighting> {
+    public static final class SightingMapper implements RowMapper<Sighting> {
 
         @Override
         public Sighting mapRow(ResultSet rs, int rowNum) throws SQLException {

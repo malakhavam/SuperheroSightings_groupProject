@@ -71,7 +71,7 @@ public class PowerDAOImpl implements PowerDAO {
         jdbc.update(DELETE_POWER, powerID);
     }
 
-    private static final class PowerMapper implements RowMapper<Power> {
+    public static final class PowerMapper implements RowMapper<Power> {
 
         @Override
         public Power mapRow(ResultSet rs, int rowNum) throws SQLException {

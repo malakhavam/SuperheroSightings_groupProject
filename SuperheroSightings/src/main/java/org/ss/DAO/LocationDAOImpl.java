@@ -35,6 +35,7 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     @Override
+    @Transactional
     public Location addNewLocation(Location location) {
         final String SQL = "INSERT INTO Locations(locationName, locationDescription, locationAddress, locationLatitude, locationLongitude) " +
                 "VALUES(?,?,?,?,?);";
@@ -89,7 +90,7 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
 
-    private static final class LocationMapper implements RowMapper<Location> {
+    public static final class LocationMapper implements RowMapper<Location> {
 
         @Override
         public Location mapRow(ResultSet rs, int rowNum) throws SQLException {

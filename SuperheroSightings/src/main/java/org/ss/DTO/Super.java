@@ -23,6 +23,7 @@ public class Super {
     private String superDescription;
 
     private List<Power> superPowers;
+    private List<Sighting> sightings;
 
     public int getSuperID() {
         return superID;
@@ -54,6 +55,14 @@ public class Super {
 
     public void setSuperPowers(List<Power> superPowers) {
         this.superPowers = superPowers;
+    }
+
+    public List<Sighting> getSightings() {
+        return sightings;
+    }
+
+    public void setSightings(List<Sighting> sightings) {
+        this.sightings = sightings;
     }
 
     @Override
