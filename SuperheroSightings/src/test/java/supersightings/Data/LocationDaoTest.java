@@ -1,6 +1,8 @@
 package supersightings.Data;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -48,13 +50,61 @@ public class LocationDaoTest {
     public void testAddAndGetLocation() {
         Location location = new Location();
         location.setLocationName("Test Location Name");
-        location.setLocationDescription("Test Location Name");
-        location.setLocationAddress("Test Location Name");
-        location.setLocationLatitude("Test Location Name");
-        location.setLocationLongitude("Test Location Name");
+        location.setLocationDescription("Test Location Description");
+        location.setLocationAddress("Test Location Address");
+        location.setLocationLatitude("Test Location Latitude");
+        location.setLocationLongitude("Test Location Longitude");
         location = locationDao.addNewLocation(location);
 
         Location fromDao = locationDao.getLocationByID(location.getLocationID());
+
+        assertEquals(location, fromDao);
+    }
+
+    @Test
+    public void testGetAllLocations() {
+        Location location = new Location();
+        location.setLocationName("Test Location Name");
+        location.setLocationDescription("Test Location Description");
+        location.setLocationAddress("Test Location Address");
+        location.setLocationLatitude("Test Location Latitude");
+        location.setLocationLongitude("Test Location Longitude");
+        location = locationDao.addNewLocation(location);
+
+        Location location2 = new Location();
+        location2.setLocationName("Test Location Name");
+        location2.setLocationDescription("Test Location Description");
+        location2.setLocationAddress("Test Location Address");
+        location2.setLocationLatitude("Test Location Latitude");
+        location2.setLocationLongitude("Test Location Longitude");
+        location2 = locationDao.addNewLocation(location);
+
+        List<Location> teachers = locationDao.getAllLocations();
+
+        assertEquals(2, teachers.size());
+        assertTrue(teachers.contains(location));
+        assertTrue(teachers.contains(location2));
+    }
+
+    @Test
+    public void testUpdateLocation() {
+        Location location = new Location();
+        location.setLocationName("Test Location Name");
+        location.setLocationDescription("Test Location Description");
+        location.setLocationAddress("Test Location Address");
+        location.setLocationLatitude("Test Location Latitude");
+        location.setLocationLongitude("Test Location Longitude");
+        location = locationDao.addNewLocation(location);
+
+        Location fromDao = locationDao.getLocationByID(location.getLocationID());
+        assertEquals(location, fromDao);
+
+        location.setLocationName("New Test First");
+        locationDao.updateLocation(location);
+
+        assertNotEquals(location, fromDao);
+
+        fromDao = locationDao.getLocationByID(location.getLocationID());
 
         assertEquals(location, fromDao);
     }

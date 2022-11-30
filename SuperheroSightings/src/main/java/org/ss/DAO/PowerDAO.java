@@ -17,7 +17,7 @@ public interface PowerDAO {
 
     public List<Power> getAllPowers();
 
-    public Boolean updatePower(Power power);
+    public void updatePower(Power power);
 
     public void deletePower(int powerID);
 }

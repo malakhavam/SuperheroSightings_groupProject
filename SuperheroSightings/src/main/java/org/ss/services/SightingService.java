@@ -1,5 +1,6 @@
 package org.ss.services;
 
+import org.ss.DTO.Location;
 import org.ss.DTO.Sighting;
 
 import java.time.LocalDate;
@@ -19,7 +20,7 @@ public interface SightingService {
 
     public Sighting readByID(int sightingID);
 
-    public List<Sighting> readSightingsByDate(LocalDate date);
+    public List<Sighting> readSightingsByDate(Location location);
 
     public void update(Sighting sighting);
 

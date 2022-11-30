@@ -1,6 +1,7 @@
 package org.ss.services;
 
 import org.ss.DAO.SightingDAO;
+import org.ss.DTO.Location;
 import org.ss.DTO.Sighting;
 
 import java.time.LocalDate;
@@ -36,8 +37,8 @@ public class SightingServiceImpl implements SightingService {
     }
 
     @Override
-    public List<Sighting> readSightingsByDate(LocalDate date) {
-        return sightingDAO.getSightingsByDate(date);
+    public List<Sighting> readSightingsByDate(Location location) {
+        return sightingDAO.getSightingsForLocation(location);
     }
 
     @Override

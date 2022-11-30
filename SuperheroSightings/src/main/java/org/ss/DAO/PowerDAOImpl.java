@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.ss.DTO.Power;
 
@@ -16,15 +17,11 @@ import org.ss.DTO.Power;
  *
  */
 
-
+@Repository
 public class PowerDAOImpl implements PowerDAO {
 
-    private final JdbcTemplate jdbc;
-
     @Autowired
-    public PowerDAOImpl(JdbcTemplate jdbc){
-        this.jdbc = jdbc;
-    }
+    JdbcTemplate jdbc;
 
     @Override
     public Power getPowerByID(int powerID) {
@@ -39,8 +36,8 @@ public class PowerDAOImpl implements PowerDAO {
     @Override
     @Transactional
     public Power addNewPower(Power power) {
-        final String SQL = "INSERT INTO Powers(powerName, powerDescription)" +
-                "VALUES(?,?)";
+        final String SQL = "INSERT INTO Powers(powerName, powerDescription) "
+                + "VALUES(?,?)";
         jdbc.update(SQL,
                 power.getPowerName(),
                 power.getPowerDescription());
@@ -57,23 +54,24 @@ public class PowerDAOImpl implements PowerDAO {
     }
 
     @Override
-    public Boolean updatePower(Power power) {
+    public void updatePower(Power power) {
         final String SQL = "UPDATE Powers SET powerName = ?, powerDescription = ? WHERE powerID = ?";
-        return jdbc.update(SQL,
+        jdbc.update(SQL,
                 power.getPowerName(),
-                power.getPowerDescription())>0;
+                power.getPowerDescription(),
+                power.getPowerID());
     }
 
     @Override
     public void deletePower(int powerID) {
-        final String DELETE_POWER = "DELETE FROM Powers WHERE powerID =?";
-        jdbc.update(DELETE_POWER, powerID);
-
         final String DELETE_SUPERPOWERS = "DELETE FROM Superpowers WHERE powerID = ?";
         jdbc.update(DELETE_SUPERPOWERS, powerID);
+
+        final String DELETE_POWER = "DELETE FROM Powers WHERE powerID =?";
+        jdbc.update(DELETE_POWER, powerID);
     }
 
-    private static final class PowerMapper implements RowMapper<Power> {
+    public static final class PowerMapper implements RowMapper<Power> {
 
         @Override
         public Power mapRow(ResultSet rs, int rowNum) throws SQLException {
