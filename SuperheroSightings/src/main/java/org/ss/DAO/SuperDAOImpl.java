@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.ss.DTO.Sighting;
 import org.ss.DTO.Super;
@@ -17,15 +18,11 @@ import org.ss.DTO.Super;
  *
  */
 
-
+@Repository
 public class SuperDAOImpl implements SuperDAO{
 
-    private final JdbcTemplate jdbc;
-
     @Autowired
-    public SuperDAOImpl(JdbcTemplate jdbc){
-        this.jdbc = jdbc;
-    }
+    JdbcTemplate jdbc;
 
     @Override
     public Super getSuperByID(int superID) {

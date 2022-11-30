@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.ss.DTO.Organization;
 
@@ -16,15 +17,11 @@ import org.ss.DTO.Organization;
  *
  */
 
-
+@Repository
 public class OrganizationDAOImpl implements OrganizationDAO{
 
-    private final JdbcTemplate jdbc;
-
     @Autowired
-    public OrganizationDAOImpl(JdbcTemplate jdbc){
-        this.jdbc = jdbc;
-    }
+    JdbcTemplate jdbc;
 
     @Override
     public Organization getOrganizationByID(int organizationID) {
@@ -39,8 +36,8 @@ public class OrganizationDAOImpl implements OrganizationDAO{
     @Override
     @Transactional
     public Organization addNewOrganization(Organization organization) {
-        final String SQL = "INSERT INTO Organization(organizationName, organizationDescription, OrganizationContact" +
-                "VALUES(?,?,?)";
+        final String SQL = "INSERT INTO Organization(organizationName, organizationDescription, OrganizationContact) "
+                + "VALUES(?,?,?)";
         jdbc.update(SQL,
                 organization.getOrganizationName(),
                 organization.getOrganizationDescription(),
@@ -63,7 +60,8 @@ public class OrganizationDAOImpl implements OrganizationDAO{
         jdbc.update(SQL,
                 organization.getOrganizationName(),
                 organization.getOrganizationDescription(),
-                organization.getOrganizationContact());
+                organization.getOrganizationContact(),
+                organization.getOrganizationID());
     }
 
     @Override
