@@ -30,7 +30,7 @@ public class SuperDAOImpl implements SuperDAO {
         try {
             final String SQL = "SELECT * FROM Supers WHERE superID = ?";
             Super sup = jdbc.queryForObject(SQL, new SuperMapper(), superID);
-            sup.setSuperPowers(getSuperpowersForSuper(superID));
+            sup.setPowers(getSuperpowersForSuper(superID));
             sup.setSightings(getSightingsForSuper(superID));
             return sup;
         } catch (DataAccessException ex) {
@@ -63,27 +63,26 @@ public class SuperDAOImpl implements SuperDAO {
         int newID = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         sup.setSuperID(newID);
         insertSuperPower(sup);
-        insertSighting(sup);
+        insertSuperSighting(sup);
         return sup;
     }
 
     private void insertSuperPower(Super sup) {
-        final String SQL = "INSERT INTO Superpower(superID, powerID) VALUES(?,?)";
-        for (Power power : sup.getSuperPowers()) {
+        final String SQL = "INSERT INTO Superpowers (superID, powerID) VALUES(?,?)";
+        for (Power power : sup.getPowers()) {
             jdbc.update(SQL,
                     sup.getSuperID(),
                     power.getPowerID());
         }
     }
 
-    private void insertSighting(Super sup) {
+    private void insertSuperSighting(Super sup) {
         final String SQL = "INSERT INTO "
-                + "Sighting(HeroId, LocationId, Date) VALUES(?,?,?)";
+                + "SuperSighting(superID, sightingID) VALUES(?,?)";
         for (Sighting sighting : sup.getSightings()) {
             jdbc.update(SQL,
                     sup.getSuperID(),
-                    sighting.getSightingLocation().getLocationID(),
-                    sighting.getSightingDate());
+                    sighting.getSightingID());
             int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
             sighting.setSightingID(newId);
         }
@@ -98,7 +97,7 @@ public class SuperDAOImpl implements SuperDAO {
         }
         public void associatePowersAndSightings(List<Super> sups) {
             for (Super sup : sups) {
-                sup.setSuperPowers(getSuperpowersForSuper(sup.getSuperID()));
+                sup.setPowers(getSuperpowersForSuper(sup.getSuperID()));
                 sup.setSightings(getSightingsForSuper(sup.getSuperID()));
             }
         }
@@ -117,7 +116,7 @@ public class SuperDAOImpl implements SuperDAO {
 
             final String DELETE_SIGHTING = "DELETE FROM Sightings WHERE superID = ?";
             jdbc.update(DELETE_SIGHTING, sup.getSuperID());
-            insertSighting(sup);
+            insertSuperSighting(sup);
         }
 
         @Override

@@ -22,7 +22,7 @@ public class Super {
     @NotBlank(message = "Enter Super description.")
     private String superDescription;
 
-    private List<Power> superPowers;
+    private List<Power> powers;
     private List<Sighting> sightings;
 
     public int getSuperID() {
@@ -49,12 +49,12 @@ public class Super {
         this.superDescription = superDescription;
     }
 
-    public List<Power> getSuperPowers() {
-        return superPowers;
+    public List<Power> getPowers() {
+        return powers;
     }
 
-    public void setSuperPowers(List<Power> superPowers) {
-        this.superPowers = superPowers;
+    public void setPowers(List<Power> powers) {
+        this.powers = powers;
     }
 
     public List<Sighting> getSightings() {
@@ -67,7 +67,7 @@ public class Super {
 
     @Override
     public int hashCode() {
-        return Objects.hash(superID, superName, superDescription, superPowers);
+        return Objects.hash(superID, superName, superDescription, powers);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class Super {
         if (!Objects.equals(this.superDescription, other.superDescription)) {
             return false;
         }
-        return Objects.equals(this.superPowers, other.superPowers);
+        return Objects.equals(this.powers, other.powers);
     }
 
 }
