@@ -1,9 +1,6 @@
 package supersightings.Data;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,6 +10,10 @@ import org.ss.DTO.*;
 import org.ss.TestApplicationConfiguration;
 
 import java.util.List;
+
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = TestApplicationConfiguration.class)
@@ -73,6 +74,18 @@ public class SuperDaoTest {
 
     @AfterEach
     public void tearDown() {
+    }
+
+    @Test
+    public void testAddAndGetSuper(){
+        Super sup = new Super();
+        sup.setSuperName("Test Super Name");
+        sup.setSuperDescription("Test Super Description");
+
+        sup = superDao.addNewSuper(sup);
+        Super fromDao = superDao.getSuperByID(sup.getSuperID());
+
+        assertEquals(sup, fromDao);
     }
     
 }

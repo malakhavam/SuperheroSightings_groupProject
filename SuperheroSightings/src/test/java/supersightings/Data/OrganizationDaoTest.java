@@ -74,5 +74,16 @@ public class OrganizationDaoTest {
     @AfterEach
     public void tearDown() {
     }
-    
+
+    @Test
+    public void testAddAndGetOrganization(){
+        Organization organization = new Organization();
+        organization.setOrganizationName("Test Organization Name");
+        organization.setOrganizationDescription("Test Organization Description");
+        organization.setOrganizationContact("Test Organization Contact");
+
+        organization = organizationDao.addNewOrganization(organization);
+        Organization fromDao = organizationDao.getOrganizationByID(organization.getOrganizationID());
+        assertEquals(organization, fromDao);
+    }
 }
