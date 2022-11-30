@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.ss.DTO.Power;
 
@@ -16,7 +17,7 @@ import org.ss.DTO.Power;
  *
  */
 
-
+@Repository
 public class PowerDAOImpl implements PowerDAO {
 
     @Autowired
