@@ -1,8 +1,7 @@
 package supersightings.Data;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
@@ -13,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.ss.DAO.LocationDAO;
+import org.ss.DAO.SightingDAO;
 import org.ss.DTO.Location;
+import org.ss.DTO.Sighting;
 import org.ss.TestApplicationConfiguration;
 
 @ExtendWith(SpringExtension.class)
@@ -22,6 +23,9 @@ public class LocationDaoTest {
 
     @Autowired
     LocationDAO locationDao;
+
+    @Autowired
+    SightingDAO sightingDao;
 
     public LocationDaoTest() {
     }
@@ -39,6 +43,10 @@ public class LocationDaoTest {
         List<Location> locations = locationDao.getAllLocations();
         for(Location location : locations) {
             locationDao.deleteLocation(location.getLocationID());
+        }
+        List<Sighting> sightings = sightingDao.getAllSightings();
+        for(Sighting sighting : sightings) {
+            sightingDao.deleteSighting(sighting.getSightingID());
         }
     }
 
@@ -107,6 +115,25 @@ public class LocationDaoTest {
         fromDao = locationDao.getLocationByID(location.getLocationID());
 
         assertEquals(location, fromDao);
+    }
+
+    @Test
+    public void testDeleteTeacherById() {
+        Location location = new Location();
+        location.setLocationName("Test Location Name");
+        location.setLocationDescription("Test Location Description");
+        location.setLocationAddress("Test Location Address");
+        location.setLocationLatitude("Test Location Latitude");
+        location.setLocationLongitude("Test Location Longitude");
+        location = locationDao.addNewLocation(location);
+
+        Location fromDao = locationDao.getLocationByID(location.getLocationID());
+        assertEquals(location,fromDao);
+
+        locationDao.deleteLocation(location.getLocationID());
+
+        fromDao = locationDao.getLocationByID(location.getLocationID());
+        assertNull(fromDao);
     }
 
 }

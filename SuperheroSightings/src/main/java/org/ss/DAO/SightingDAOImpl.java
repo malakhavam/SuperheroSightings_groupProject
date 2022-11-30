@@ -60,7 +60,7 @@ public class SightingDAOImpl implements SightingDAO{
 
     @Override
     public List<Sighting> getAllSightings() {
-        final String SQL = "SELECT * Sightings";
+        final String SQL = "SELECT * FROM Sightings";
         List<Sighting> sightings = jdbc.query(SQL, new SightingMapper());
         associateLocationsForSightings(sightings);
         return sightings;
