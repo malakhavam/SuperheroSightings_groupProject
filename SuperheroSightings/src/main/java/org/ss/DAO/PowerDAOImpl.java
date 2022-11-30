@@ -19,12 +19,8 @@ import org.ss.DTO.Power;
 
 public class PowerDAOImpl implements PowerDAO {
 
-    private final JdbcTemplate jdbc;
-
     @Autowired
-    public PowerDAOImpl(JdbcTemplate jdbc){
-        this.jdbc = jdbc;
-    }
+    JdbcTemplate jdbc;
 
     @Override
     public Power getPowerByID(int powerID) {
