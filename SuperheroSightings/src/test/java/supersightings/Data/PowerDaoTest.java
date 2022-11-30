@@ -1,15 +1,20 @@
 package supersightings.Data;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.ss.DAO.*;
 import org.ss.DTO.*;
+import org.ss.TestApplicationConfiguration;
 
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(classes = TestApplicationConfiguration.class)
 public class PowerDaoTest {
     @Autowired
     SuperDAO superDao;
@@ -68,5 +73,16 @@ public class PowerDaoTest {
     @AfterEach
     public void tearDown() {
     }
-    
+
+    @Test
+    public void testAddAndGetPower(){
+        Power power = new Power();
+        power.setPowerName("Test Power Name");
+        power.setPowerDescription("Test Power Description");
+
+        power = powerDao.addNewPower(power);
+        Power fromDao = powerDao.getPowerByID(power.getPowerID());
+
+        assertEquals(power, fromDao);
+    }
 }
