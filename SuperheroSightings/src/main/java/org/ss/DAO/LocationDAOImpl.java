@@ -21,12 +21,8 @@ import org.ss.DTO.Super;
 @Repository
 public class LocationDAOImpl implements LocationDAO {
 
-    private final JdbcTemplate jdbc;
-
     @Autowired
-    public LocationDAOImpl(JdbcTemplate jdbc){
-        this.jdbc = jdbc;
-    }
+    JdbcTemplate jdbc;
 
     @Override
     public Location getLocationByID(int locationID) {
@@ -39,7 +35,6 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     @Override
-    //@Transactional
     public Location addNewLocation(Location location) {
         final String SQL = "INSERT INTO Locations(locationName, locationDescription, locationAddress, locationLatitude, locationLongitude) " +
                 "VALUES(?,?,?,?,?);";
