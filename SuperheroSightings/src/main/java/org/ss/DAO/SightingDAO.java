@@ -1,5 +1,6 @@
 package org.ss.DAO;
 
+import org.ss.DTO.Location;
 import org.ss.DTO.Sighting;
 
 import java.time.LocalDate;
@@ -22,5 +23,5 @@ public interface SightingDAO {
 
     public void deleteSighting(int sightingID);
 
-    public List<Sighting> getSightingsByDate(LocalDate date);
+    List<Sighting> getSightingsForLocation(Location location);
 }
