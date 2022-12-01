@@ -48,11 +48,6 @@ public class SuperDaoTest {
 
     @BeforeEach
     public void setUp() {
-        List<Super> sups = superDao.getAllSupers();
-        for(Super sup : sups){
-            superDao.deleteSuper(sup.getSuperID());
-        }
-
         List<Location> locations = locationDao.getAllLocations();
         for(Location location : locations) {
             locationDao.deleteLocation(location.getLocationID());
@@ -72,6 +67,11 @@ public class SuperDaoTest {
         for(Power power : powers){
             powerDao.deletePower(power.getPowerID());
         }
+
+        List<Super> sups = superDao.getAllSupers();
+        for(Super sup : sups){
+            superDao.deleteSuper(sup.getSuperID());
+        }
     }
 
     @AfterEach
@@ -90,6 +90,14 @@ public class SuperDaoTest {
         powers.add(power);
         List<Sighting> sightings = new ArrayList<>();
 
+        Super sup = new Super();
+        sup.setSuperName("Test Super Name 12");
+        sup.setSuperDescription("Test Super Description 12");
+        sup.setPowers(powers);
+        sup.setSightings(sightings);
+        sup = superDao.addNewSuper(sup);
+
+
         Location location = new Location();
         location.setLocationName("Test Location Name");
         location.setLocationDescription("Test Location Description");
@@ -97,13 +105,6 @@ public class SuperDaoTest {
         location.setLocationLatitude("Test Location Latitude");
         location.setLocationLongitude("Test Location Longitude");
         location = locationDao.addNewLocation(location);
-
-        Super sup = new Super();
-        sup.setSuperName("Test Super Name 2");
-        sup.setSuperDescription("Test Super Description 2");
-        sup.setPowers(powers);
-        sup.setSightings(sightings);
-        sup = superDao.addNewSuper(sup);
 
         LocalDate date = LocalDate.now();
 
@@ -114,8 +115,9 @@ public class SuperDaoTest {
         sighting = sightingDao.addNewSighting(sighting);
 
         sightings.add(sighting);
+        sup.setSightings(sightings);
+        superDao.updateSuper(sup);
 
-        sup = superDao.addNewSuper(sup);
         Super fromDao = superDao.getSuperByID(sup.getSuperID());
 
         assertEquals(sup, fromDao);

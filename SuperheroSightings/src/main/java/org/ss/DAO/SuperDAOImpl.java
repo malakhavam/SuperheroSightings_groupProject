@@ -55,7 +55,7 @@ public class SuperDAOImpl implements SuperDAO {
     @Transactional
     public Super addNewSuper(Super sup) {
         final String SQL = "INSERT INTO Supers(superName, superDescription) " +
-                "VALUES(?,?)";
+                "VALUES(?,?);";
         jdbc.update(SQL,
                 sup.getSuperName(),
                 sup.getSuperDescription());

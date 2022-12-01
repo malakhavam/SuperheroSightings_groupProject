@@ -47,7 +47,7 @@ public class OrganizationDAOImpl implements OrganizationDAO{
     @Override
     @Transactional
     public Organization addNewOrganization(Organization organization) {
-        final String SQL = "INSERT INTO Organization(organizationName, organizationDescription, OrganizationContact) "
+        final String SQL = "INSERT INTO Organizations(organizationName, organizationDescription, organizationContact) "
                 + "VALUES(?,?,?)";
         jdbc.update(SQL,
                 organization.getOrganizationName(),

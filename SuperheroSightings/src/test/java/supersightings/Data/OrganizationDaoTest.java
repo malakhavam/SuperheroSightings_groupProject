@@ -77,6 +77,8 @@ public class OrganizationDaoTest {
 
     @Test
     public void testAddAndGetOrganization(){
+
+
         Organization organization = new Organization();
         organization.setOrganizationName("Test Organization Name");
         organization.setOrganizationDescription("Test Organization Description");
