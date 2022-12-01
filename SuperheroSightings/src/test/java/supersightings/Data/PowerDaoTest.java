@@ -47,7 +47,7 @@ public class PowerDaoTest {
     public void setUp() {
         List<Super> sups = superDao.getAllSupers();
         for(Super sup : sups){
-            superDao.deleteSuper(sup.getSuperID());
+            superDao.deleteSuper(sup.getId());
         }
 
         List<Location> locations = locationDao.getAllLocations();

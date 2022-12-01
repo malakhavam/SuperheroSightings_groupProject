@@ -85,7 +85,7 @@ public class LocationDAOImpl implements LocationDAO {
                 + "FROM Locations"
                 + "JOIN Sightings ON Sightings.locationID = Locations.locationID"
                 + "WHERE Sightings.superID = ?";
-        List<Location> locations = jdbc.query(SQL, new LocationMapper(), sup.getSuperID());
+        List<Location> locations = jdbc.query(SQL, new LocationMapper(), sup.getId());
         return locations;
     }
 

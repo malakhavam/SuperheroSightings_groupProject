@@ -49,7 +49,7 @@ public class SightingDAOImpl implements SightingDAO{
         final String SQL = "INSERT INTO Sightings(superID, locationID, sightingDate) " +
                 "VALUES(?,?,?)";
         jdbc.update(SQL,
-                sighting.getSightingSuper().getSuperID(),
+                sighting.getSightingSuper().getId(),
                 sighting.getSightingLocation().getLocationID(),
                 sighting.getSightingDate());
 
@@ -75,7 +75,7 @@ public class SightingDAOImpl implements SightingDAO{
     public void updateSighting(Sighting sighting) {
         final String SQL = "UPDATE Sightings SET superID = ?, locationID = ?, sightingDate = ? WHERE sighting ID = ?";
         jdbc.update(SQL,
-                sighting.getSightingSuper().getSuperID(),
+                sighting.getSightingSuper().getId(),
                 sighting.getSightingLocation().getLocationID(),
                 sighting.getSightingDate(),
                 sighting.getSightingID());

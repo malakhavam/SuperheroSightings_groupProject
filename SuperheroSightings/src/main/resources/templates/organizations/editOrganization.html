@@ -7,7 +7,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
     <title>Superhero Sightings</title>
   </head>
   <body>
@@ -28,39 +27,41 @@
             </div>
            
            <div class="col text-center m-2">
-               <a href="supers.html" class="btn btn-outline-primary btn-lg">Supers</a>
+               <a href="supers" class="btn btn-outline-primary btn-lg">Supers</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="powers.html" class="btn btn-outline-primary btn-lg">Powers</a>
+               <a href="powers" class="btn btn-outline-primary btn-lg">Powers</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="locations.html" class="btn btn-outline-primary btn-lg">Locations</a>
+               <a href="locations" class="btn btn-outline-primary btn-lg">Locations</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="organizations.html" class="btn btn-outline-primary btn-lg">Organizations</a>
+               <a href="organizations" class="btn btn-outline-primary btn-lg">Organizations</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="sightings.html" class="btn btn-outline-primary btn-lg">Sightings</a>
+               <a href="sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
            </div>           
        </div>
         <!-- END Navbar -->
         <!-- Add form -->
         <div class="row m-4 border border-dark">
             <div class="col-3 text-center m-3">
-                <span class="h3">Add Organization</span>
+                <span class="h3">Edit Organization</span>
             </div>
             <div class="col-7 text-center m-3">
-                <form action="/organizations/addOrganization" method="POST">
+                <form action="/organizations/editOrganization" method="POST">
+                    
+                    <input type="hidden" name="organizationId" th:value="${organization.id}" id="organizationId"/>
                     
                     <div class="form-group row">
                         <label for="organizationName" class="col-3 col-form-label">
                             Organization Name</label>
                         <div class="col-9">
-                            <input type="text" name="organizationName" 
+                            <input type="text" name="organizationName" th:value="${organization.name}"
                                    id="organizationName" class="form-control"/>
                             <p class="alert alert-danger" th:each="error : ${errors}" 
                                     th:text="${error.message}"
@@ -73,8 +74,8 @@
                             Hero type</label>
                         <div class="col-9">
                             <select id="isHero" name="isHero" class="form-control" >
-                                <option value="true">Superhero</option>
-                                <option value="false">Supervillain</option>
+                                <option value="true" th:selected="${organization.isHero}">Superhero</option>
+                                <option value="false" th:selected="${!organization.isHero}">Supervillain</option>
                             </select>
                         </div>
                     </div>
@@ -83,7 +84,7 @@
                         <label for="organizationDescription" class="col-3 col-form-label">
                             Organization Description</label>
                         <div class="col-9">
-                            <textarea type="textarea" name="organizationDescription" 
+                            <textarea type="textarea" name="organizationDescription" th:text="${organization.description}"
                                       id="organizationDescription" class="form-control"></textarea>
                             <p class="alert alert-danger" th:each="error : ${errors}" 
                                     th:text="${error.message}"
@@ -95,7 +96,7 @@
                         <label for="organizationAddress" class="col-3 col-form-label">
                             Organization Address</label>
                         <div class="col-9">
-                            <textarea type="textarea" name="organizationAddress" 
+                            <textarea type="textarea" name="organizationAddress" th:text="${organization.address}"
                                       id="organizationAddress" class="form-control"></textarea>
                             <p class="alert alert-danger" th:each="error : ${errors}" 
                                     th:text="${error.message}"
@@ -107,7 +108,7 @@
                         <label for="organizationContact" class="col-3 col-form-label">
                             Organization Contact</label>
                         <div class="col-9">
-                            <textarea type="textarea" name="organizationContact" 
+                            <textarea type="textarea" name="organizationContact" th:text="${organization.contact}"
                                       id="organizationContact" class="form-control"></textarea>
                             <p class="alert alert-danger" th:each="error : ${errors}" 
                                     th:text="${error.message}"
@@ -122,7 +123,8 @@
                             <select multiple id="heroId" name="heroId" class="form-control" >
                                 <option th:each="hero : ${heros}" 
                                         th:value="${hero.id}" 
-                                        th:text="${hero.name}">
+                                        th:text="${hero.name}"
+                                        th:selected="${organization.members.contains(hero)}">
                                     Hero Name</option>
                             </select>
                         </div>
@@ -133,7 +135,7 @@
                             <a href="/organizations" class="btn btn-outline-primary btn-lg">Go Back</a>
                         </div> 
 
-                        <button type="submit" class="col m-4 btn btn-primary btn-lg">Add Organization</button>
+                        <button type="submit" class="col m-4 btn btn-primary btn-lg">Edit Organization</button>
                     </div>
                     
                 </form>

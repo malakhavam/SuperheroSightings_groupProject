@@ -17,7 +17,7 @@
         <!-- Page header -->
         <div class="row m-4">
             <div class="col text-center border border-dark">
-                <h1>Locations</h1>
+                <h1>Heroes</h1>
             </div>
         </div>
         <!-- END Page header -->
@@ -28,70 +28,70 @@
             </div>
            
            <div class="col text-center m-2">
-               <a href="supers.html" class="btn btn-outline-primary btn-lg">Supers</a>
+               <a href="supers" class="btn btn-outline-primary btn-lg">Supers</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="powers.html" class="btn btn-outline-primary btn-lg">Powers</a>
+               <a href="powers" class="btn btn-outline-primary btn-lg">Powers</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="locations.html" class="btn btn-outline-primary btn-lg">Locations</a>
+               <a href="locations" class="btn btn-outline-primary btn-lg">Locations</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="organizations.html" class="btn btn-outline-primary btn-lg">Organizations</a>
+               <a href="organizations" class="btn btn-outline-primary btn-lg">Organizations</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="sightings.html" class="btn btn-outline-primary btn-lg">Sightings</a>
+               <a href="sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
            </div>           
        </div>
         <!-- END Navbar -->
-        <!-- Add location button -->
+        
+        <!-- Add hero button -->
         <div class="row m-4">
             <div class="col text-left m-2">
-                <a href="./locations/addLocation.html" class="btn btn-primary btn-lg">Add Location</a>
+                <a href="supers/addSuper" class="btn btn-primary btn-lg">Add Super</a>
             </div> 
         </div>
-        <!-- END Add location button -->
-        <!-- Locations table -->
+        <!-- END Add hero button -->
+        <!-- Hero table -->
         <div class="row m-4 border border-dark">
             <div class="col text-center m-3">
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Location Name</th>
-                            <th>Latitude</th>
-                            <th>Longitude</th>
+                            <th>Hero Name</th>
+                            <th>Alignment</th>
                             <th>Details</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="location : ${locations}">
-                            <td th:text="${location.id}">Location ID</td>
+                        <tr th:each="hero : ${heros}">
+                            <td th:text="${hero.id}">Location ID</td>
                             
-                            <td th:text='${location.name}'>Location Name</td>
+                            <td th:text='${hero.name}'>Location Name</td>
                             
-                            <td th:text='${location.latitude}'>Latitude</td>
+                            <td th:if='${hero.isHero}'>Superhero</td>
+                            <td th:unless='${hero.isHero}'>Supervillain</td>
                             
-                            <td th:text="${location.longitude}">Longitude</td>
+                            <td><a href="#" th:href="@{/heroes/detailsHero(id=${hero.id})}">Details</a></td>
                             
-                            <td><a href="#" th:href="@{/locations/detailsLocation(id=${location.id})}">Details</a></td>
+                            <td><a href="#" th:href="@{/heroes/editHero(id=${hero.id})}">Edit</a></td>
                             
-                            <td><a href="#" th:href="@{/locations/editLocation(id=${location.id})}">Edit</a></td>
-                            
-                            <td><a href="#" th:href="@{/locations/deleteLocation(id=${location.id})}">Delete</a></td>
+                            <td><a href="#" th:href="@{/heroes/deleteHero(id=${hero.id})}">Delete</a></td>
                             
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <!-- END Locations table -->
+        <!-- END hero table -->
+        
     </div> 
     <!-- End main body -->
 

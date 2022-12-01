@@ -7,7 +7,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
     <title>Superhero Sightings</title>
   </head>
   <body>
@@ -28,33 +27,35 @@
             </div>
            
            <div class="col text-center m-2">
-               <a href="supers.html" class="btn btn-outline-primary btn-lg">Supers</a>
+               <a href="supers" class="btn btn-outline-primary btn-lg">Supers</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="powers.html" class="btn btn-outline-primary btn-lg">Powers</a>
+               <a href="powers" class="btn btn-outline-primary btn-lg">Powers</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="locations.html" class="btn btn-outline-primary btn-lg">Locations</a>
+               <a href="locations" class="btn btn-outline-primary btn-lg">Locations</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="organizations.html" class="btn btn-outline-primary btn-lg">Organizations</a>
+               <a href="organizations" class="btn btn-outline-primary btn-lg">Organizations</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="sightings.html" class="btn btn-outline-primary btn-lg">Sightings</a>
+               <a href="sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
            </div>           
        </div>
         <!-- END Navbar -->
         <!-- Add form -->
         <div class="row m-4 border border-dark">
             <div class="col-3 text-center m-3">
-                <span class="h3">Add Sighting</span>
+                <span class="h3">Edit Sighting</span>
             </div>
             <div class="col-7 text-center m-3">
-                <form action="/sightings/addSighting" method="POST">
+                <form action="/sightings/editSighting" method="POST">
+                    
+                    <input type="hidden" name="sightingId" th:value="${sighting.id}" id="sightingId"/>
                     
                     <div class="form-group row">
                         <label for="hero" class="col-3 col-form-label">
@@ -63,7 +64,8 @@
                             <select id="heroId" name="heroId" class="form-control" >
                                 <option th:each="hero : ${heros}" 
                                         th:value="${hero.id}" 
-                                        th:text="${hero.name}">
+                                        th:text="${hero.name}"
+                                        th:selected="${hero.sightings.contains(sighting)}">
                                     Hero Name</option>
                             </select>
                         </div>
@@ -81,7 +83,8 @@
                                         + location.latitude 
                                         +' , '
                                         + location.longitude 
-                                        + ')'}">
+                                        + ')'}"
+                                        th:selected="${sighting.location.equals(location)}">
                                     Location</option>
                             </select>
                         </div>
@@ -91,7 +94,7 @@
                         <label for="sightingDate" class="col-3 col-form-label">
                             Sighting Date</label>
                         <div class="col-9">
-                            <input type="text" name="sightingDate" placeholder='yyyy-mm-dd'
+                            <input type="text" name="sightingDate" placeholder='yyyy-mm-dd' th:value="${sighting.date}"
                                    id="sightingDate" class="form-control"/>
                             <p class="alert alert-danger"
                                th:if="${dateError!=null}"
@@ -104,7 +107,7 @@
                             <a href="/sightings" class="btn btn-outline-primary btn-lg">Go Back</a>
                         </div> 
 
-                        <button type="submit" class="col m-4 btn btn-primary btn-lg">Add Sighting</button>
+                        <button type="submit" class="col m-4 btn btn-primary btn-lg">Edit Sighting</button>
                     </div>
                     
                 </form>

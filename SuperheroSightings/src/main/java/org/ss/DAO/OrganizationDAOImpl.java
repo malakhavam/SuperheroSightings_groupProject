@@ -63,7 +63,7 @@ public class OrganizationDAOImpl implements OrganizationDAO{
         final String SQL = "INSERT INTO SuperOrganization(superID, organizationId) VALUES(?,?)";
         for(Super sup : organization.getSupers()) {
             jdbc.update(SQL,
-                    sup.getSuperID(),
+                    sup.getId(),
                     organization.getOrganizationID());
         }
     }

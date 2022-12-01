@@ -28,39 +28,41 @@
             </div>
            
            <div class="col text-center m-2">
-               <a href="supers.html" class="btn btn-outline-primary btn-lg">Supers</a>
+               <a href="supers" class="btn btn-outline-primary btn-lg">Supers</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="powers.html" class="btn btn-outline-primary btn-lg">Powers</a>
+               <a href="powers" class="btn btn-outline-primary btn-lg">Powers</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="locations.html" class="btn btn-outline-primary btn-lg">Locations</a>
+               <a href="locations" class="btn btn-outline-primary btn-lg">Locations</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="organizations.html" class="btn btn-outline-primary btn-lg">Organizations</a>
+               <a href="organizations" class="btn btn-outline-primary btn-lg">Organizations</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="sightings.html" class="btn btn-outline-primary btn-lg">Sightings</a>
+               <a href="sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
            </div>           
        </div>
         <!-- END Navbar -->
         <!-- Add form -->
         <div class="row m-4 border border-dark">
             <div class="col-3 text-center m-3">
-                <span class="h3">Add Location</span>
+                <span class="h3">Edit Location</span>
             </div>
             <div class="col-7 text-center m-3">
-                <form action="/locations/addLocation" method="POST">
+                <form action="/locations/editLocation" method="POST">
+                    
+                    <input type="hidden" name="locationId" th:value="${location.id}" id="locationId"/>
                     
                     <div class="form-group row">
                         <label for="locationName" class="col-3 col-form-label">
                             Location Name</label>
                         <div class="col-9">
-                            <input type="text" name="locationName" 
+                            <input type="text" name="locationName" th:value="${location.name}"
                                    id="locationName" class="form-control"/>
                             <p class="alert alert-danger" th:each="error : ${errors}" 
                                     th:text="${error.message}"
@@ -72,7 +74,7 @@
                         <label for="latitude" class="col-3 col-form-label">
                             Latitude</label>
                         <div class="col-9">
-                            <input type="text" name="latitude" 
+                            <input type="text" name="latitude" th:value="${location.latitude}"
                                    id="latitude" class="form-control"/>
                             <p class="alert alert-danger" th:each="error : ${errors}" 
                                     th:text="${error.message}"
@@ -87,7 +89,7 @@
                         <label for="longitude" class="col-3 col-form-label">
                             Longitude</label>
                         <div class="col-9">
-                            <input type="text" name="longitude" 
+                            <input type="text" name="longitude" th:value="${location.longitude}"
                                    id="longitude" class="form-control"/>
                             <p class="alert alert-danger" th:each="error : ${errors}" 
                                     th:text="${error.message}"
@@ -102,9 +104,8 @@
                         <label for="description" class="col-3 col-form-label">
                             Descritpion</label>
                         <div class="col-9">
-                            <textarea type="textarea" name="description" 
-                                id="description" class="form-control">
-                            </textarea>
+                            <textarea type="textarea" name="description" th:text="${location.description}"
+                                      id="description" class="form-control"></textarea>
                             <p class="alert alert-danger" th:each="error : ${errors}" 
                                 th:text="${error.message}"
                                 th:if="${error.getPropertyPath().toString().equals('description')}">Error message</p>
@@ -115,13 +116,11 @@
                         <label for="addressInformation" class="col-3 col-form-label">
                             Address Information</label>
                         <div class="col-9">
-                            <textarea type="textarea" name="addressInformation" 
-                                      id="addressInformation" class="form-control">
-                            </textarea>
+                            <textarea type="textarea" name="addressInformation" th:text="${location.addressInformation}"
+                                      id="addressInformation" class="form-control"></textarea>
                             <p class="alert alert-danger" th:each="error : ${errors}" 
                                     th:text="${error.message}"
                                     th:if="${error.getPropertyPath().toString().equals('addressInformation')}">Error message</p>
-                                      
                         </div>
                     </div>
                     
@@ -130,7 +129,7 @@
                             <a href="/locations" class="btn btn-outline-primary btn-lg">Go Back</a>
                         </div> 
 
-                        <button type="submit" class="col m-4 btn btn-primary btn-lg">Add Location</button>
+                        <button type="submit" class="col m-4 btn btn-primary btn-lg">Edit Location</button>
                     </div>
                     
                 </form>

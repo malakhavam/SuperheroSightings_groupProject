@@ -17,7 +17,7 @@
         <!-- Page header -->
         <div class="row m-4">
             <div class="col text-center border border-dark">
-                <h1>Superpowers</h1>
+                <h1>Locations</h1>
             </div>
         </div>
         <!-- END Page header -->
@@ -28,59 +28,77 @@
             </div>
            
            <div class="col text-center m-2">
-               <a href="supers.html" class="btn btn-outline-primary btn-lg">Supers</a>
+               <a href="supers" class="btn btn-outline-primary btn-lg">Supers</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="powers.html" class="btn btn-outline-primary btn-lg">Powers</a>
+               <a href="powers" class="btn btn-outline-primary btn-lg">Powers</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="locations.html" class="btn btn-outline-primary btn-lg">Locations</a>
+               <a href="locations" class="btn btn-outline-primary btn-lg">Locations</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="organizations.html" class="btn btn-outline-primary btn-lg">Organizations</a>
+               <a href="organizations" class="btn btn-outline-primary btn-lg">Organizations</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="sightings.html" class="btn btn-outline-primary btn-lg">Sightings</a>
+               <a href="sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
            </div>           
        </div>
         <!-- END Navbar -->
-        <!-- details superpower -->
+        <!-- details location -->
         <div class="row m-4 border border-dark">
             
             <!-- ID -->
             <div class="col-6 text-right"><strong>ID</strong></div>
             <div class="col-6 text-left">
-                <span th:text="${superpower.id}">display id</span>
+                <span th:text="${location.id}">display id</span>
             </div>
             <hr>
             <!-- Name -->
             <div class="col-6 text-right"><strong>Name</strong></div>
             <div class="col-6 text-left">
-                <span th:text="${superpower.name}">display name</span>
+                <span th:text="${location.name}">display name</span>
+            </div>
+            <hr>
+            <!-- Latitude -->
+            <div class="col-6 text-right"><strong>Latitude</strong></div>
+            <div class="col-6 text-left">
+                <span th:text="${location.latitude}">display latitude</span>
+            </div>
+            <hr>
+            <!-- Longitude -->
+            <div class="col-6 text-right"><strong>Longitude</strong></div>
+            <div class="col-6 text-left">
+                <span th:text="${location.longitude}">display longitude</span>
             </div>
             <hr>
             <!-- Description -->
             <div class="col-6 text-right"><strong>Description</strong></div>
             <div class="col-6 text-left">
-                <span th:text="${superpower.description}">display description</span>
+                <span th:text="${location.description}">display description</span>
+            </div>
+            <hr>
+            <!-- Address information -->
+            <div class="col-6 text-right"><strong>Address Information</strong></div>
+            <div class="col-6 text-left">
+                <span th:text="${location.addressInformation}">display Address Information</span>
             </div>
             <hr>
             <!-- Heroes -->
-            <div class="col-6 text-right"><strong>Heroes knowing the power</strong></div>
+            <div class="col-6 text-right"><strong>Heroes seen here</strong></div>
             <div class="col-6 text-left">
                 <span th:each="hero : ${heros}">
-                    <span th:text="${hero.name}">
+                    <span th:text="${
+                          hero.name}">
                         display hero</span><br/>
                 </span>
             </div>
             <hr>
-            
         </div>
-        <!-- END details superpower -->
+        <!-- END details location -->
     </div> 
     <!-- End main body -->
 

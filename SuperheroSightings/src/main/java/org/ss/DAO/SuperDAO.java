@@ -1,6 +1,8 @@
 package org.ss.DAO;
 import org.ss.DTO.Super;
 import java.util.List;
+import org.ss.DTO.Location;
+import org.ss.DTO.Sighting;
 
 /**
  *@author : Claude Seide, Everlyn Leon, Mariya Malakhava, Neyssa Cadet
@@ -23,4 +25,7 @@ public interface SuperDAO {
     public List<Super> getAllSupersByOrganization(int organizationID);
 
     public List<Super> getSupersByLocation(int locationID);
+    
+    Super getSuperForSighting(Sighting sighting);
+    
 }

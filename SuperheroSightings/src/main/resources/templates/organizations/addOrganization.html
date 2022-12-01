@@ -17,7 +17,7 @@
         <!-- Page header -->
         <div class="row m-4">
             <div class="col text-center border border-dark">
-                <h1>Locations</h1>
+                <h1>Organizations</h1>
             </div>
         </div>
         <!-- END Page header -->
@@ -28,42 +28,40 @@
             </div>
            
            <div class="col text-center m-2">
-               <a href="supers.html" class="btn btn-outline-primary btn-lg">Supers</a>
+               <a href="supers" class="btn btn-outline-primary btn-lg">Supers</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="powers.html" class="btn btn-outline-primary btn-lg">Powers</a>
+               <a href="powers" class="btn btn-outline-primary btn-lg">Powers</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="locations.html" class="btn btn-outline-primary btn-lg">Locations</a>
+               <a href="locations" class="btn btn-outline-primary btn-lg">Locations</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="organizations.html" class="btn btn-outline-primary btn-lg">Organizations</a>
+               <a href="organizations" class="btn btn-outline-primary btn-lg">Organizations</a>
            </div>
            
            <div class="col text-center m-2">
-               <a href="sightings.html" class="btn btn-outline-primary btn-lg">Sightings</a>
+               <a href="sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
            </div>           
        </div>
         <!-- END Navbar -->
         <!-- Add form -->
         <div class="row m-4 border border-dark">
             <div class="col-3 text-center m-3">
-                <span class="h3">Edit Location</span>
+                <span class="h3">Add Organization</span>
             </div>
             <div class="col-7 text-center m-3">
-                <form action="/locations/editLocation" method="POST">
-                    
-                    <input type="hidden" name="locationId" th:value="${location.id}" id="locationId"/>
+                <form action="/organizations/addOrganization" method="POST">
                     
                     <div class="form-group row">
-                        <label for="locationName" class="col-3 col-form-label">
-                            Location Name</label>
+                        <label for="organizationName" class="col-3 col-form-label">
+                            Organization Name</label>
                         <div class="col-9">
-                            <input type="text" name="locationName" th:value="${location.name}"
-                                   id="locationName" class="form-control"/>
+                            <input type="text" name="organizationName" 
+                                   id="organizationName" class="form-control"/>
                             <p class="alert alert-danger" th:each="error : ${errors}" 
                                     th:text="${error.message}"
                                     th:if="${error.getPropertyPath().toString().equals('name')}">Error message</p>
@@ -71,65 +69,71 @@
                     </div>
                     
                     <div class="form-group row">
-                        <label for="latitude" class="col-3 col-form-label">
-                            Latitude</label>
+                        <label for="isHero" class="col-3 col-form-label">
+                            Hero type</label>
                         <div class="col-9">
-                            <input type="text" name="latitude" th:value="${location.latitude}"
-                                   id="latitude" class="form-control"/>
-                            <p class="alert alert-danger" th:each="error : ${errors}" 
-                                    th:text="${error.message}"
-                                    th:if="${error.getPropertyPath().toString().equals('latitude')}">Error message</p>
-                            <p class="alert alert-danger"
-                               th:if="${latitudeError!=null}"
-                               th:text="${latitudeError}">Error message</p>
+                            <select id="isHero" name="isHero" class="form-control" >
+                                <option value="true">Superhero</option>
+                                <option value="false">Supervillain</option>
+                            </select>
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="longitude" class="col-3 col-form-label">
-                            Longitude</label>
+                        <label for="organizationDescription" class="col-3 col-form-label">
+                            Organization Description</label>
                         <div class="col-9">
-                            <input type="text" name="longitude" th:value="${location.longitude}"
-                                   id="longitude" class="form-control"/>
+                            <textarea type="textarea" name="organizationDescription" 
+                                      id="organizationDescription" class="form-control"></textarea>
                             <p class="alert alert-danger" th:each="error : ${errors}" 
                                     th:text="${error.message}"
-                                    th:if="${error.getPropertyPath().toString().equals('longitude')}">Error message</p>
-                            <p class="alert alert-danger"
-                               th:if="${longitudeError!=null}"
-                               th:text="${longitudeError}">Error message</p>
+                                    th:if="${error.getPropertyPath().toString().equals('description')}">Error message</p>
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="description" class="col-3 col-form-label">
-                            Descritpion</label>
+                        <label for="organizationAddress" class="col-3 col-form-label">
+                            Organization Address</label>
                         <div class="col-9">
-                            <textarea type="textarea" name="description" th:text="${location.description}"
-                                      id="description" class="form-control"></textarea>
+                            <textarea type="textarea" name="organizationAddress" 
+                                      id="organizationAddress" class="form-control"></textarea>
                             <p class="alert alert-danger" th:each="error : ${errors}" 
-                                th:text="${error.message}"
-                                th:if="${error.getPropertyPath().toString().equals('description')}">Error message</p>
+                                    th:text="${error.message}"
+                                    th:if="${error.getPropertyPath().toString().equals('address')}">Error message</p>
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="addressInformation" class="col-3 col-form-label">
-                            Address Information</label>
+                        <label for="organizationContact" class="col-3 col-form-label">
+                            Organization Contact</label>
                         <div class="col-9">
-                            <textarea type="textarea" name="addressInformation" th:text="${location.addressInformation}"
-                                      id="addressInformation" class="form-control"></textarea>
+                            <textarea type="textarea" name="organizationContact" 
+                                      id="organizationContact" class="form-control"></textarea>
                             <p class="alert alert-danger" th:each="error : ${errors}" 
                                     th:text="${error.message}"
-                                    th:if="${error.getPropertyPath().toString().equals('addressInformation')}">Error message</p>
+                                    th:if="${error.getPropertyPath().toString().equals('contact')}">Error message</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="members" class="col-3 col-form-label">
+                            Members</label>
+                        <div class="col-9">
+                            <select multiple id="heroId" name="heroId" class="form-control" >
+                                <option th:each="hero : ${heros}" 
+                                        th:value="${hero.id}" 
+                                        th:text="${hero.name}">
+                                    Hero Name</option>
+                            </select>
                         </div>
                     </div>
                     
                     <div class="row m-4">
                         <div class="col text-center m-4">
-                            <a href="/locations" class="btn btn-outline-primary btn-lg">Go Back</a>
+                            <a href="/organizations" class="btn btn-outline-primary btn-lg">Go Back</a>
                         </div> 
 
-                        <button type="submit" class="col m-4 btn btn-primary btn-lg">Edit Location</button>
+                        <button type="submit" class="col m-4 btn btn-primary btn-lg">Add Organization</button>
                     </div>
                     
                 </form>

@@ -3,7 +3,7 @@ package org.ss.DTO;
 import java.util.List;
 import java.util.Objects;
 import javax.validation.constraints.NotBlank;
-
+import javax.validation.constraints.Size;
 
 /**
  *@author : Claude Seide, Everlyn Leon, Mariya Malakhava, Neyssa Cadet
@@ -13,73 +13,42 @@ import javax.validation.constraints.NotBlank;
 
 public class Organization {
 
-    private int organizationID;
-
-    @NotBlank(message = "Enter Organization name.")
-    private String organizationName;
-
-    @NotBlank(message = "Enter Organization description.")
-    private String organizationDescription;
-
-    private Location organizationAddress;
-
-    @NotBlank(message = "Enter Organization contact information.")
-    private String organizationContact;
-
+    
+    private int OrganizationID;
+    
+    @NotBlank(message = "Name must not be empty.")
+    @Size(max = 50, message="Name must be less than 50 characters.")
+    private String name;
+    
+    private boolean isSuper;
+    
+    @Size(max = 255, message="Description must be less than 255 characters.")
+    private String description;
+    
+    @Size(max = 255, message="Address must be less than 255 characters.")
+    private String address;
+    
+    @Size(max = 255, message="Contact must be less than 255 characters.")
+    private String contact;
+    
     private List<Super> supers;
 
-    public int getOrganizationID() {
-        return organizationID;
-    }
-
-    public void setOrganizationID(int organizationID) {
-        this.organizationID = organizationID;
-    }
-
-    public String getOrganizationName() {
-        return organizationName;
-    }
-
-    public void setOrganizationName(String organizationName) {
-        this.organizationName = organizationName;
-    }
-
-    public String getOrganizationDescription() {
-        return organizationDescription;
-    }
-
-    public void setOrganizationDescription(String organizationDescription) {
-        this.organizationDescription = organizationDescription;
-    }
-
-    public Location getOrganizationAddress() {
-        return organizationAddress;
-    }
-
-    public void setOrganizationAddress(Location organizationAddress) {
-        this.organizationAddress = organizationAddress;
-    }
-
-    public String getOrganizationContact() {
-        return organizationContact;
-    }
-
-    public void setOrganizationContact(String organizationContact) {
-        this.organizationContact = organizationContact;
-    }
-
-    public List<Super> getSupers() {
-        return supers;
-    }
-
-    public void setSupers(List<Super> supers) {
-        this.supers = supers;
+    @Override
+    public String toString() {
+        return "Organization{" + "id=" + OrganizationID + ", name=" + name + ", isSuper=" + isSuper + ", description=" + description + ", address=" + address + ", contact=" + contact + ", supers=" + supers + '}';
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(organizationID, organizationName, organizationDescription, organizationAddress,organizationContact ,supers);
+        int hash = 7;
+        hash = 53 * hash + this.OrganizationID;
+        hash = 53 * hash + Objects.hashCode(this.name);
+        hash = 53 * hash + (this.isSuper ? 1 : 0);
+        hash = 53 * hash + Objects.hashCode(this.description);
+        hash = 53 * hash + Objects.hashCode(this.address);
+        hash = 53 * hash + Objects.hashCode(this.contact);
+        hash = 53 * hash + Objects.hashCode(this.supers);
+        return hash;
     }
 
     @Override
@@ -94,21 +63,86 @@ public class Organization {
             return false;
         }
         final Organization other = (Organization) obj;
-        if (this.organizationID != other.organizationID) {
+        if (this.OrganizationID != other.OrganizationID) {
             return false;
         }
-        if (!Objects.equals(this.organizationName, other.organizationName)) {
+        if (this.isSuper != other.isSuper) {
             return false;
         }
-        if (!Objects.equals(this.organizationDescription, other.organizationDescription)) {
+        if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        if (!Objects.equals(this.organizationContact, other.organizationContact)) {
+        if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-        if (!Objects.equals(this.organizationAddress, other.organizationAddress)) {
+        if (!Objects.equals(this.address, other.address)) {
             return false;
         }
-        return Objects.equals(this.supers, other.supers);
+        if (!Objects.equals(this.contact, other.contact)) {
+            return false;
+        }
+        if (!Objects.equals(this.supers, other.supers)) {
+            return false;
+        }
+        return true;
     }
+
+    public int getOrganizationID() {
+        return OrganizationID;
+    }
+
+    public void setOrganizationID(int id) {
+        this.OrganizationID = OrganizationID;
+    }
+
+    public String getOrganizationName() {
+        return name;
+    }
+
+    public void setOrganizationName(String name) {
+        this.name = name;
+    }
+
+    public boolean isIsSuper() {
+        return isSuper;
+    }
+
+    public void setIsSuper(boolean isSuper) {
+        this.isSuper = isSuper;
+    }
+
+    public String getOrganizationDescription() {
+        return description;
+    }
+
+    public void setOrganizationDescription(String description) {
+        this.description = description;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getOrganizationContact() {
+        return contact;
+    }
+
+    public void setOrganizationContact(String contact) {
+        this.contact = contact;
+    }
+
+    public List<Super> getSupers() {
+        return supers;
+    }
+
+    public void setSupers(List<Super> supers) {
+        this.supers = supers;
+    }
+    
+    
+    
 }
