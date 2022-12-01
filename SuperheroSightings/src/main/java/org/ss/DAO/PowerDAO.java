@@ -8,7 +8,7 @@ import java.util.List;
  *
  */
 
-
+//interface
 public interface PowerDAO {
 
     public Power getPowerByID(int powerID);

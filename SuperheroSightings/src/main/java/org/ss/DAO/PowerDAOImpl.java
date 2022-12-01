@@ -16,7 +16,7 @@ import org.ss.DTO.Power;
  *@author : Claude Seide, Everlyn Leon, Mariya Malakhava, Neyssa Cadet
  *
  */
-
+//fix
 @Repository
 public class PowerDAOImpl implements PowerDAO {
 
