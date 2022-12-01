@@ -70,13 +70,12 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     @Override
-    //@Transactional
     public void deleteLocation(int locationID) {
-        final String DELETE_LOCATION = "DELETE FROM Locations WHERE locationID = ?";
-        jdbc.update(DELETE_LOCATION, locationID);
-
         final String DELETE_SIGHTING = "DELETE FROM Sightings WHERE locationID = ?";
         jdbc.update(DELETE_SIGHTING, locationID);
+
+        final String DELETE_LOCATION = "DELETE FROM Locations WHERE locationID = ?";
+        jdbc.update(DELETE_LOCATION, locationID);
     }
 
     @Override

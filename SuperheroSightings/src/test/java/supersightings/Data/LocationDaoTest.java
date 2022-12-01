@@ -62,8 +62,8 @@ public class LocationDaoTest {
         location.setLocationAddress("Test Location Address");
         location.setLocationLatitude("Test Location Latitude");
         location.setLocationLongitude("Test Location Longitude");
-        location = locationDao.addNewLocation(location);
 
+        location = locationDao.addNewLocation(location);
         Location fromDao = locationDao.getLocationByID(location.getLocationID());
 
         assertEquals(location, fromDao);
@@ -85,13 +85,13 @@ public class LocationDaoTest {
         location2.setLocationAddress("Test Location Address");
         location2.setLocationLatitude("Test Location Latitude");
         location2.setLocationLongitude("Test Location Longitude");
-        location2 = locationDao.addNewLocation(location);
+        location2 = locationDao.addNewLocation(location2);
 
-        List<Location> teachers = locationDao.getAllLocations();
+        List<Location> locations = locationDao.getAllLocations();
 
-        assertEquals(2, teachers.size());
-        assertTrue(teachers.contains(location));
-        assertTrue(teachers.contains(location2));
+        assertEquals(2, locations.size());
+        assertTrue(locations.contains(location));
+        assertTrue(locations.contains(location2));
     }
 
     @Test
@@ -118,7 +118,7 @@ public class LocationDaoTest {
     }
 
     @Test
-    public void testDeleteTeacherById() {
+    public void testDeleteLocationById() {
         Location location = new Location();
         location.setLocationName("Test Location Name");
         location.setLocationDescription("Test Location Description");
