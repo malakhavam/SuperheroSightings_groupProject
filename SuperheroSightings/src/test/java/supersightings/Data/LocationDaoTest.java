@@ -60,8 +60,8 @@ public class LocationDaoTest {
         location.setLocationName("Test Location Name");
         location.setLocationDescription("Test Location Description");
         location.setLocationAddress("Test Location Address");
-        location.setLocationLatitude("Test Location Latitude");
-        location.setLocationLongitude("Test Location Longitude");
+//        location.setLocationLatitude("Test Location Latitude");
+//        location.setLocationLongitude("Test Location Longitude");
         location = locationDao.addNewLocation(location);
 
         Location fromDao = locationDao.getLocationByID(location.getLocationID());
@@ -75,16 +75,16 @@ public class LocationDaoTest {
         location.setLocationName("Test Location Name");
         location.setLocationDescription("Test Location Description");
         location.setLocationAddress("Test Location Address");
-        location.setLocationLatitude("Test Location Latitude");
-        location.setLocationLongitude("Test Location Longitude");
+ //       location.setLocationLatitude("Test Location Latitude");
+//        location.setLocationLongitude("Test Location Longitude");
         location = locationDao.addNewLocation(location);
 
         Location location2 = new Location();
         location2.setLocationName("Test Location Name");
         location2.setLocationDescription("Test Location Description");
         location2.setLocationAddress("Test Location Address");
-        location2.setLocationLatitude("Test Location Latitude");
-        location2.setLocationLongitude("Test Location Longitude");
+//        location2.setLocationLatitude("Test Location Latitude");
+//        location2.setLocationLongitude("Test Location Longitude");
         location2 = locationDao.addNewLocation(location);
 
         List<Location> teachers = locationDao.getAllLocations();
@@ -100,8 +100,8 @@ public class LocationDaoTest {
         location.setLocationName("Test Location Name");
         location.setLocationDescription("Test Location Description");
         location.setLocationAddress("Test Location Address");
-        location.setLocationLatitude("Test Location Latitude");
-        location.setLocationLongitude("Test Location Longitude");
+//        location.setLocationLatitude("Test Location Latitude");
+//        location.setLocationLongitude("Test Location Longitude");
         location = locationDao.addNewLocation(location);
 
         Location fromDao = locationDao.getLocationByID(location.getLocationID());
@@ -123,8 +123,8 @@ public class LocationDaoTest {
         location.setLocationName("Test Location Name");
         location.setLocationDescription("Test Location Description");
         location.setLocationAddress("Test Location Address");
-        location.setLocationLatitude("Test Location Latitude");
-        location.setLocationLongitude("Test Location Longitude");
+//        location.setLocationLatitude("Test Location Latitude");
+//        location.setLocationLongitude("Test Location Longitude");
         location = locationDao.addNewLocation(location);
 
         Location fromDao = locationDao.getLocationByID(location.getLocationID());

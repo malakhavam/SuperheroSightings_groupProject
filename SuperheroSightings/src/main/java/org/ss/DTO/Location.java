@@ -24,10 +24,10 @@ public class Location {
     private String locationAddress;
 
     @NotBlank(message = "Enter Location latitude.")
-    private String locationLatitude;
+    private double locationLatitude;
 
     @NotBlank(message = "Enter Location longitude.")
-    private String locationLongitude;
+    private double locationLongitude;
 
 
 
@@ -63,19 +63,19 @@ public class Location {
         this.locationAddress = locationAddress;
     }
 
-    public String getLocationLatitude() {
+    public double getLocationLatitude() {
         return locationLatitude;
     }
 
-    public void setLocationLatitude(String locationLatitude) {
+    public void setLocationLatitude(double locationLatitude) {
         this.locationLatitude = locationLatitude;
     }
 
-    public String getLocationLongitude() {
+    public double getLocationLongitude() {
         return locationLongitude;
     }
 
-    public void setLocationLongitude(String locationLongitude) {
+    public void setLocationLongitude(double locationLongitude) {
         this.locationLongitude = locationLongitude;
     }
 

@@ -99,8 +99,8 @@ public class LocationDAOImpl implements LocationDAO {
             location.setLocationName(rs.getString("locationName"));
             location.setLocationDescription(rs.getString("locationDescription"));
             location.setLocationAddress(rs.getString("locationAddress"));
-            location.setLocationLatitude(rs.getString("locationLatitude"));
-            location.setLocationLongitude(rs.getString("locationLongitude"));
+            location.setLocationLatitude(rs.getDouble("locationLatitude"));
+            location.setLocationLongitude(rs.getDouble("locationLongitude"));
             return location;
         }
     }

@@ -158,7 +158,7 @@ public class SuperDAOImpl implements SuperDAO {
         }
 
         @Override
-        public List<Super> getSupersByLocation ( int locationID){
+        public List<Super> getSupersByLocation ( Location locationID){
             final String SQL = "SELECT sup.* FROM Supers sup "
                     + "JOIN Sighting s ON s.superID = sup.superID "
                     + "WHERE s.locationID = ?";

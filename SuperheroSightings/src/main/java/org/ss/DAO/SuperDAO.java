@@ -24,7 +24,7 @@ public interface SuperDAO {
 
     public List<Super> getAllSupersByOrganization(int organizationID);
 
-    public List<Super> getSupersByLocation(int locationID);
+    public List<Super> getSupersByLocation(Location location);
     
     Super getSuperForSighting(Sighting sighting);
     
