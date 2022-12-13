@@ -1,24 +1,29 @@
-package org.ss.DAO;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.ss.dao;
 
-import org.ss.DTO.Location;
+import org.ss.models.Location;
+import org.ss.models.Hero;
 import java.util.List;
 
 /**
  *@author : Claude Seide, Everlyn Leon, Mariya Malakhava, Neyssa Cadet
  *
  */
-
-
-public interface LocationDAO {
-    public Location getLocationByID(int locationID);
-
-    public Location addNewLocation(Location location);
-
-    public List<Location> getAllLocations();
-
-    public void updateLocation(Location location);
-
-    public void deleteLocation(int locationID);
-
-    public List<Location> getLocationsBySuper(int superID);
+public interface LocationDao {
+    
+    Location getLocationById(int id);
+    
+    List<Location> getAllLocations();
+    
+    Location addLocation(Location location);
+    
+    void updateLocation(Location location);
+    
+    void deleteLocationById(int id);
+    
+    List<Location> getLocationsForHero(Hero hero);
 }

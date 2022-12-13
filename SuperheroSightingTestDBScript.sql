@@ -1,25 +1,26 @@
-DROP DATABASE IF EXISTS superheroSightingDBTest;
-CREATE DATABASE superheroSightingDBTest;
-USE superheroSightingDBTest;
+DROP DATABASE IF EXISTS SuperheroSightingTestDBScript;
+CREATE DATABASE SuperheroSightingTestDBScript;
+USE SuperheroSightingTestDBScript;
 
---Creates tables using Second Normal form and Primary Keys
+-- Creates tables using Second Normal form and Primary Keys
 
-CREATE TABLE Powers(
-	powerID INT PRIMARY KEY AUTO_INCREMENT,
-  powerName VARCHAR(60) NOT NULL,
-  powerDescription VARCHAR(255) NOT NULL
+CREATE TABLE Superpowers(
+  superpowerID INT PRIMARY KEY AUTO_INCREMENT,
+  superpowerName VARCHAR(60) NOT NULL,
+  superpowerDescription VARCHAR(255) NOT NULL
 );
 
 
-CREATE TABLE Supers(
-	superID INT PRIMARY KEY AUTO_INCREMENT,
-  superName VARCHAR(60) NOT NULL UNIQUE,
-  superDescription VARCHAR(255) NOT NULL
+CREATE TABLE Heroes(
+  heroID INT PRIMARY KEY AUTO_INCREMENT,
+  isHero BOOLEAN NOT NULL,
+  heroName VARCHAR(60) NOT NULL UNIQUE,
+  heroDescription VARCHAR(255) NOT NULL
 );
 
 
 CREATE TABLE Locations(
-	locationID INT PRIMARY KEY AUTO_INCREMENT,
+  locationID INT PRIMARY KEY AUTO_INCREMENT,
   locationName VARCHAR(60) NOT NULL,
   locationDescription VARCHAR(255) NOT NULL,
   locationAddress VARCHAR(60) NOT NULL,
@@ -29,21 +30,23 @@ CREATE TABLE Locations(
 
 
 CREATE TABLE Sightings(
-	sightingID INT PRIMARY KEY AUTO_INCREMENT,
+  sightingID INT PRIMARY KEY AUTO_INCREMENT,
   sightingDate DATE NOT NULL,
-  superID INT NOT NULL,
+  heroID INT NOT NULL,
   locationID INT NOT NULL,
-    FOREIGN KEY (superID) 
-    REFERENCES Supers(superID),
+    FOREIGN KEY (heroID) 
+    REFERENCES Heroes(heroID),
     FOREIGN KEY (locationID) 
     REFERENCES Locations(locationID)
 );
 
 
 CREATE TABLE Organizations(
-	organizationID INT PRIMARY KEY AUTO_INCREMENT, 
+  organizationID INT PRIMARY KEY AUTO_INCREMENT, 
   organizationName VARCHAR(60) NOT NULL,
+  isHero BOOLEAN NOT NULL,
   organizationDescription VARCHAR(255) NOT NULL,
+  organizationAddress VARCHAR(255),
   organizationContact VARCHAR(60) NOT NULL,
   locationID INT NULL,
     FOREIGN KEY (locationID) 
@@ -51,40 +54,41 @@ CREATE TABLE Organizations(
 );
 
 
---Relationship between tables
+-- Relationship between tables
 
-CREATE TABLE Superpowers(
-	superID INT NOT NULL,
-  powerID INT NOT NULL,
+CREATE TABLE HeroSuperpowers(
+  heroID INT NOT NULL,
+  superpowerID INT NOT NULL,
   CONSTRAINT PK_Superpower 
-  PRIMARY KEY (superID, powerID),
-    FOREIGN KEY (superID) 
-    REFERENCES Supers(superID),
-    FOREIGN KEY (powerID) 
-    REFERENCES Powers(powerID)
+  PRIMARY KEY (heroID, superpowerID),
+    FOREIGN KEY (heroID) 
+    REFERENCES Heroes(heroID),
+    FOREIGN KEY (superpowerID) 
+    REFERENCES Superpowers(superpowerID)
 );
 
 
-CREATE TABLE SuperSighting(
-  	superID INT NOT NULL,
+CREATE TABLE HeroSightings (
+  heroID INT NOT NULL,
   sightingID INT NOT NULL,
-  PRIMARY KEY (superID, sightingID),
-  CONSTRAINT PK_SuperSighting
-    FOREIGN KEY (superID)
-    REFERENCES Supers(superID),
+  PRIMARY KEY (heroID, sightingID),
+  CONSTRAINT PK_HeroSighting
+    FOREIGN KEY (heroID)
+    REFERENCES Heroes(heroID),
     FOREIGN KEY (sightingID)
     REFERENCES Sightings(sightingID)
 );
 
 
-CREATE TABLE SuperOrganizations(
-	superID INT NOT NULL,
+CREATE TABLE HeroOrganizations(
+  heroID INT NOT NULL,
   organizationID INT NOT NULL,
-  PRIMARY KEY (superID, organizationID),
-  CONSTRAINT PK_SuperOrganization
-    FOREIGN KEY (superID) 
-    REFERENCES Supers(superID),
+  PRIMARY KEY (heroID, organizationID),
+  CONSTRAINT PK_HeroOrganization
+    FOREIGN KEY (heroID) 
+    REFERENCES Heroes(heroID),
     FOREIGN KEY (organizationID) 
     REFERENCES Organizations(organizationID)
 );
+
 
