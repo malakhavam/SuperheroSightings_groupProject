@@ -1,24 +1,29 @@
-package org.ss.DAO;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.ss.dao;
 
-import org.ss.DTO.Organization;
+import org.ss.models.Hero;
+import org.ss.models.Organization;
 import java.util.List;
-
 
 /**
  *@author : Claude Seide, Everlyn Leon, Mariya Malakhava, Neyssa Cadet
  *
  */
-
-
-public interface OrganizationDAO {
-    public Organization getOrganizationByID(int organizationID);
-    public Organization addNewOrganization(Organization organization);
-
-    public List<Organization> getAllOrganizations();
-
-    public void updateOrganization(Organization organization);
-
-    public void deleteOrganization(int organizationID);
-
-    public List<Organization> getOrganizationsBySuper(int superID);
+public interface OrganizationDao {
+    
+    Organization getOrganizationById(int id);
+    
+    List<Organization> getAllOrganizations();
+    
+    Organization addOrganization(Organization organization);
+    
+    void updateOrganization(Organization organization);
+    
+    void deleteOrganizationById(int id);
+    
+    List<Organization> getOrganizationsForHero(Hero hero);
 }
