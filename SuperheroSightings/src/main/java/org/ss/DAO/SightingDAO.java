@@ -27,3 +27,4 @@ public interface SightingDao {
     
     List<Sighting> getSightingsForLocation(Location location);
 }
+
